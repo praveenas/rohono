@@ -30,20 +30,20 @@
             $("#" + person).droppable({
                 drop: function (event, ui) {
                     var audio = new Audio('http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+                    audio.load();
                     audio.play();
                     $('#myModal').modal('show');
                 }
             });
             $('#myModal').on('hidden.bs.modal', function () {
                 var audio = new Audio('http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+                audio.load();
                 audio.play();
             })
         });
-       
     </script>
     <style>
         .boy {
-            /*border: 1px solid blue;*/
             width: 300px;
             height: 400px;
             position: absolute;
@@ -51,7 +51,6 @@
             top: 350px;
         }
         .girl {
-            /*border: 1px solid red;*/
             width: 300px;
             height: 400px;
             position: absolute;
@@ -77,7 +76,7 @@
                  height="100px">
 
         </h1>
-   
+     
         <div id="boy" class="boy"></div>
         <div id="girl" class="girl"></div>
         <div>
@@ -108,8 +107,8 @@
             </div>
         </div>
     </div>
-</div>
 
+</div>
 
 </body>
 </html>
