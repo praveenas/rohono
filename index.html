@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -10,31 +10,23 @@
 
     <script>
         $(function () {
-
-
             var objects = ['ball', 'book', 'pretzel'];
             var images = ['http://pngimg.com/uploads/football/football_PNG1082.png',
                 'https://openclipart.org/download/78469/1281229876.svg',
                 'https://openclipart.org/download/188586/arking-pretzel.svg'];
             var index = Math.floor(Math.random() * 3);
-
-
             $(".objectText").text(objects[index]);
             var $object = $('#object');
-
             $object.attr("src", images[index]);
             $object.draggable({
                 cursor: "crosshair",
                 revert: 'invalid'
-
             });
-
             var persons = ['boy', 'girl'];
             var personIndex = Math.floor(Math.random() * 2);
             var person = persons[personIndex];
             $(".personText").text(person);
             $(".btn-" + person).attr("data-dismiss", "modal");
-
             $("#" + person).droppable({
                 drop: function (event, ui) {
                     var audio = new Audio('http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
@@ -42,38 +34,58 @@
                     $('#myModal').modal('show');
                 }
             });
-
             $('#myModal').on('hidden.bs.modal', function () {
                 var audio = new Audio('http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
                 audio.play();
             })
         });
+        //        function allowDrop(ev) {
+        //            ev.preventDefault();
+        //        }
+        //        function denyDrop(ev) {
+        //            //ev.preventDefault();
+        //            var audio = new Audio('/Users/praveena/Desktop/try_again.mp3');
+        //            audio.play();
+        //        }
+        //        function drag(ev) {
+        //            ev.dataTransfer.setData("text", ev.target.id);
+        //        }
+        //        function drop(ev) {
+        //            ev.preventDefault();
+        //            var data = ev.dataTransfer.getData("text");
+        //            ev.target.appendChild(document.getElementById(data));
+        //            var audio = new Audio('http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+        //            audio.play();
+        ////            alert("dropped!!!!")
+        //        }
     </script>
     <style>
-
-
         .boy {
+            /*margin-bottom: -35px;*/
             border: 1px solid blue;
             width: 300px;
             height: 400px;
             position: absolute;
             left: 520px;
             top: 350px;
+            /*z-index: -1;*/
         }
-
         .girl {
+            /*margin-top: -75px;*/
             border: 1px solid red;
             width: 300px;
             height: 400px;
             position: absolute;
             left: 200px;
             top: 350px;
-            
+            /*z-index: -1;*/
         }
-
         .red {
             color: red;
             text-transform: uppercase
+        }
+        #ball {
+            /*z-index: 1;*/
         }
     </style>
 
@@ -90,7 +102,11 @@
                  height="100px">
 
         </h1>
-      
+        <!--</div>-->
+
+
+        <!--<div class="row">-->
+
         <div id="boy" class="boy"></div>
         <div id="girl" class="girl"></div>
         <div>
