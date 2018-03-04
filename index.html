@@ -29,18 +29,18 @@
             var person = persons[personIndex];
             $(".personText").text(person);
             $(".btn-" + person).attr("data-dismiss", "modal");
+            var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+
+
             $("#" + person).droppable({
                 drop: function (event, ui) {
-                    var audio = new Audio('http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
-                    audio.load();
-                    audio.play();
+                    audioElement.play();
                     $('#myModal').modal('show');
                 }
             });
             $('#myModal').on('hidden.bs.modal', function () {
-                var audio = new Audio('http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
-                audio.load();
-                audio.play();
+                audioElement.play();
             })
         });
     </script>
