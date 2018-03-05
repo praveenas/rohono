@@ -28,7 +28,7 @@
             var personIndex = Math.floor(Math.random() * 2);
             var person = persons[personIndex];
             $(".personText").text(person);
-            $(".btn-" + person).attr("data-dismiss", "modal");
+            $(".btn-" + person).attr("onclick", "dismiss()");
             var audioElement = document.createElement('audio');
             audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
 
@@ -39,10 +39,14 @@
                     $('#myModal').modal('show');
                 }
             });
-            $('#myModal').on('hidden.bs.modal', function () {
-                audioElement.play();
-            })
         });
+
+        function dismiss() {
+            var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+            audioElement.play();
+            $('#myModal').modal('hide');
+        }
     </script>
     <style>
         .boy {
