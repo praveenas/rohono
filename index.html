@@ -33,9 +33,15 @@
             audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
 
 
+            $("#sd").attr("onclick", "play('" + objects[index] + "-" + person + "')");
+            $("#askwho").attr("onclick", "play('" + objects[index] + "')");
+
+            $('#who').attr("src", 'https://praveenas.github.io/rohono/images/' + objects[index] + '-' + person + '.png');
+
             $("#" + person).droppable({
                 drop: function (event, ui) {
                     audioElement.play();
+                    $('#myModal').modal({backdrop: 'static', keyboard: false});
                     $('#myModal').modal('show');
                 }
             });
@@ -47,12 +53,17 @@
             audioElement.play();
             $('#myModal').modal('hide');
         }
+        function play(file) {
+            var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', 'https://praveenas.github.io/rohono/audio/' + file + '.mp3');
+            audioElement.play();
+        }
     </script>
     <style>
         .boy {
             /*border: 1px solid red;*/
             width: 300px;
-            height: 450px;
+            height: 500px;
             position: absolute;
             left: 450px;
             top: 200px;
@@ -61,15 +72,43 @@
         .girl {
             /*border: 1px solid red;*/
             width: 300px;
-            height: 450px;
+            height: 500px;
             position: absolute;
             left: 140px;
             top: 200px;
         }
 
-        .red {
+        .red, .text, .content {
             color: red;
             text-transform: uppercase
+        }
+
+        .text, .content {
+            font-size: 50px;
+            font-weight: bolder;
+            left: 35%;
+            margin-left: 10px;
+        }
+
+        .content {
+            position: absolute;
+            bottom: 0;
+
+        }
+
+        .btn-boy {
+            /*float: right;*/
+        }
+
+        .who {
+            width: 350px;
+            height: 400px;
+            margin-bottom: 10px;
+        }
+
+        .choices {
+            width: 350px;
+            display: block;
         }
     </style>
 
@@ -81,13 +120,17 @@
     <h1> Give the <span class="objectText"></span> to the
         <span class="red personText"></span>.
 
-        <img id=object width="100px"
-             height="100px">
-
+        <img id=object width="100px" height="100px">
+        <img id="sd" width="50px" height="100px"
+             src="https://openclipart.org/download/235442/minimal-speaker-icon-2.svg">
     </h1>
 
-    <div id="boy" class="boy"></div>
-    <div id="girl" class="girl"></div>
+    <div id="boy" class="boy">
+        <div class="content"> boy</div>
+    </div>
+    <div id="girl" class="girl">
+        <div class="content"> girl</div>
+    </div>
     <div>
         <img height="500px"
              src="https://openclipart.org/download/233385/girlc.svg"
@@ -99,24 +142,38 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h1><span class="red">who</span> has the <span class="objectText"></span>?</h1>
+                    <h1><span class="red">who</span> has the <span class="objectText"></span>?
+                        <img id="askwho" width="50px" height="100px"
+                             src="https://openclipart.org/download/235442/minimal-speaker-icon-2.svg"></h1>
                 </div>
                 <div class="jumbotron">
-                    <button type="button" class="btn btn-lg btn-girl">
-                        <img height=300px width=200px src="https://openclipart.org/download/231942/agirl.svg"
-                             alt="girl">
-                    </button>
 
-                    <button type="button" class="btn btn-lg btn-boy">
-                        <img height=300px width=200px src="https://openclipart.org/download/231941/aboy.svg"
-                             alt="boy">
-                    </button>
+                    <div class="who">
+                        <img id="who" height="400px" width="300px">
+                    </div>
+                    <div class="choices">
+                        <div style="float: left">
+                            <button type="button" class="btn btn-girl">
+                                <img height=100px width="125px"
+                                     src="https://openclipart.org/download/231942/agirl.svg"
+                                     alt="girl">
+                            </button>
+                            <div class="text"> girl</div>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-boy">
+                                <img height=100px width="125px"
+                                     src="https://openclipart.org/download/231941/aboy.svg"
+                                     alt="boy">
+
+                            </button>
+                            <div class="text"> boy</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 </body>
 </html>
