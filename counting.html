@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+          integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+  <style>
+
+    .block {
+      width: 100px;
+      margin: 1px;
+    }
+    .row {
+    width: 1100px;
+    }
+
+
+  </style>
+  <script>
+
+        $(function () {
+          var i;
+          for (i = 1; i < 21; i++) {
+
+            var text = i%5 ==0 ? "" : i;
+            var dropText = "<div id='drop"+i+"' class='block text-center alert alert-secondary'>"+text+"</div>"
+
+            $("#drop").append(dropText);
+
+            $("#drop"+i).droppable({
+                accept: "#"+i,
+                activeClass: "alert-success",
+                drop: function (event, ui) {
+
+                    var index = event.target.id.replace("drop","");
+                    $("#"+event.target.id).removeClass( "alert-secondary" ).addClass( "alert-primary" ).html(index);
+                    $("#"+index).hide();
+                }
+            });
+
+            var dragText = "<div id='"+i+"' class='drag block text-center alert alert-primary'>"+i+"</div>"
+            $("#drag").append(dragText);
+
+            $("#"+i).draggable({
+                cursor: "crosshair",
+                revert: 'invalid'
+            });
+          }
+        })
+
+
+  </script>
+</head>
+<body>
+
+<div class="container center">
+
+  <h1> Count by 5!</h1>
+
+  <div class="jumbotron">
+    <div id="drop" class="row">
+    </div>
+  </div>
+
+  <div class="jumbotron">
+    <h1>Drag Me!</h1>
+    <div id="drag" class="row">
+
+    </div>
+  </div>
+
+
+</div>
+
+</body>
+</html>
