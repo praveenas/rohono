@@ -15,65 +15,166 @@
   <style>
 
     .block {
-      width: 50px;
-      margin: 1px;
+      width: 59.7917px;
+      margin: 2px;
+      border: 1px solid #5D6D7E;
+      border-radius: 10px;
     }
 
+    .dragblock {
+      width: 59.7917px;
+      margin: 2px;
+      border: 1px dotted #5D6D7E;
+      border-radius: 10px;
+    }
+
+    #dropContainer{
+      //width: 700px;
+      //border: 1px solid red;
+    }
+
+    #dragContainer{
+      //width: 200px;
+      //border: 1px solid red;
+    }
+
+    .counting{
+      background-color:#5D6D7E;
+      font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
+      padding: 50px;
+    }
+
+    #playagain{
+       display: none;
+      // width: 100px;
+       margin-top: 20px;
+    }
+    .btn-lg{
+      width:100%
+    }
+
+
+
   </style>
-  <script>
+</head>
+<script >
 
         $(function () {
-          var i;
-          for (i = 1; i < 21; i++) {
 
-            var text = i%5 ==0 ? "" : i;
+
+          var url = new URL(window.location);
+          var countByParam = url.searchParams.get("countBy");
+          var shuffleParam = url.searchParams.get("shuffle");
+
+          var countBy = countByParam == null ? Math.min(Math.floor(Math.random() * 10)+1,10): countByParam;
+          var max = countBy * 10;
+
+          $("#countBy").html(countBy);
+
+          var audioElement = document.createElement('audio');
+          audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+
+          var j;
+          for(j=1; j < (max/countBy + 1); j++){
+           var dropRow = "<div id='dropRow"+j+"' class='row'></div>";
+           $("#dropContainer").append(dropRow);
+
+          }
+
+          var i;
+          var dragArray=[];
+          for (i = 1; i < max+1; i++) {
+
+            $('#playagain').click(function() {
+                location.reload();
+            });
+            var text = i%countBy ==0 ? "?" : (i < 10 ? i : i) ;
+
             var dropText = "<div id='drop"+i+"' class='block text-center alert alert-secondary'>"+text+"</div>"
 
-            $("#drop").append(dropText);
+            $("#dropRow"+Math.ceil(i/countBy)).append(dropText);
 
-            $("#drop"+i).droppable({
-                accept: "#"+i,
-                activeClass: "alert-success",
-                drop: function (event, ui) {
+            if(i%countBy == 0){
+              $("#drop"+i).droppable({
+                  accept: "#"+i,
+                  activeClass: "alert-success",
+                  addClasses: "false",
+                  drop: function (event, ui) {
+                      var index = event.target.id.replace("drop","");
+                      $("#"+event.target.id).html(index).addClass("alert-success");
+                      $("#"+index).hide();
+                      if($('.dragblock:visible').length == 0) {
+                        $("#dragcontent").html('<div><h2>CONGRATULATIONS!</div>');
+                         audioElement.play();
+                         $("#playagain").show();
+                      }
+                  }
+              });
 
-                    var index = event.target.id.replace("drop","");
-                    $("#"+event.target.id).removeClass( "alert-secondary" ).addClass( "alert-primary" ).html(index);
-                    $("#"+index).hide();
-                }
-            });
+              dragArray.push(i);
 
-            var dragText = "<div id='"+i+"' class='drag block text-center alert alert-primary'>"+i+"</div>"
-            $("#drag").append(dragText);
 
-            $("#"+i).draggable({
-                cursor: "crosshair",
-                revert: 'invalid'
-            });
+            }
+
           }
+
+          if(shuffleParam == "true"){
+            dragArray = shuffle(dragArray);
+          }
+
+          for(y=0; y < dragArray.length; y++ ) {
+           var rowId = Math.ceil(dragArray[y]/countBy);
+           var dragText = "<div id='"+dragArray[y]+"' class='drag dragblock text-center alert alert-primary'>"+dragArray[y]+"</div>"
+           var dragRow = "<div id='dragRow"+rowId+"' class='row'></div>";
+           $("#dragContainer").append(dragRow);
+           $("#dragRow"+ rowId).append(dragText);
+           $("#"+dragArray[y]).draggable({
+              cursor: "crosshair",
+              revert: 'invalid'
+           });
+          }
+
+          function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+              // Pick a remaining element...
+              randomIndex = Math.floor(Math.random() * currentIndex);
+              currentIndex -= 1;
+
+              // And swap it with the current element.
+              temporaryValue = array[currentIndex];
+              array[currentIndex] = array[randomIndex];
+              array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+          }
+
         })
 
-
   </script>
-</head>
-<body>
+<body style="background-color:#5D6D7E">
 
-<div class="container center">
-
-  <h1> Count by 5!</h1>
-
-  <div class="jumbotron">
-    <div id="drop" class="row">
+<div class="counting">
+  <div class="container1">
+    <h1> COUNT BY <span id="countBy"></span>'s</h1>
+    <div>
+      <button id="playagain" type="button" class="btn btn-success btn-lg">Play Again</button>
+    </div>
+    <div class="row">
+      <div class="col-md-auto">
+        <div id="dropContainer">
+        </div>
+      </div>
+      <div class="col-sm-auto" style="margin-left: 50px;">
+        <div id="dragContainer">
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="jumbotron">
-    <h1>Drag Me!</h1>
-    <div id="drag" class="row">
-
-    </div>
-  </div>
-
-
 </div>
 
 </body>
