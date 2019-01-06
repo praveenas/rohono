@@ -11,21 +11,24 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-
+  <script src='//vws.responsivevoice.com/v/e?key=7xDYr79A'></script>
+  <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
   <style>
 
     .block {
       width: 59.7917px;
       margin: 2px;
-      border: 1px solid #5D6D7E;
+      border: 1px solid #001f3f;
       border-radius: 10px;
+      font-weight: bold;
     }
 
     .dragblock {
       width: 59.7917px;
       margin: 2px;
-      border: 1px dotted #5D6D7E;
+      border: 1px dotted #001f3f;
       border-radius: 10px;
+      font-weight: bold;
     }
 
     #dropContainer{
@@ -39,8 +42,8 @@
     }
 
     .counting{
-      background-color:#5D6D7E;
-      font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
+      background-color:#7FDBFF;
+      //font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
       padding: 50px;
     }
 
@@ -52,12 +55,16 @@
     .btn-lg{
       width:100%
     }
+    .container1{
+      margin: 10px;
+    }
+
 
 
 
   </style>
 </head>
-<script >
+<script>
 
         $(function () {
 
@@ -89,8 +96,8 @@
                 location.reload();
             });
             var text = i%countBy ==0 ? "?" : (i < 10 ? i : i) ;
-
-            var dropText = "<div id='drop"+i+"' class='block text-center alert alert-secondary'>"+text+"</div>"
+            var clazz =  i%countBy == 0 ? "alert-secondary" : "alert-light";
+            var dropText = "<div id='drop"+i+"' class='block text-center alert "+clazz+"'>"+text+"</div>"
 
             $("#dropRow"+Math.ceil(i/countBy)).append(dropText);
 
@@ -98,6 +105,8 @@
               $("#drop"+i).droppable({
                   accept: "#"+i,
                   activeClass: "alert-success",
+                  hoverClass: "alert-success",
+
                   addClasses: "false",
                   drop: function (event, ui) {
                       var index = event.target.id.replace("drop","");
@@ -108,12 +117,16 @@
                          audioElement.play();
                          $("#playagain").show();
                       }
+                  },
+                  deactivate: function(event,ui){
+                    var index = event.target.id.replace("drop","");
+                    if($("#"+event.target.id).html() == index){
+                      $("#"+event.target.id).addClass("alert-success");
+                    }
+
                   }
               });
-
               dragArray.push(i);
-
-
             }
 
           }
@@ -124,13 +137,16 @@
 
           for(y=0; y < dragArray.length; y++ ) {
            var rowId = Math.ceil(dragArray[y]/countBy);
-           var dragText = "<div id='"+dragArray[y]+"' class='drag dragblock text-center alert alert-primary'>"+dragArray[y]+"</div>"
+           var dragText = "<div id='"+dragArray[y]+"' class='drag dragblock text-center alert alert-light'>"+dragArray[y]+"</div>"
            var dragRow = "<div id='dragRow"+rowId+"' class='row'></div>";
            $("#dragContainer").append(dragRow);
            $("#dragRow"+ rowId).append(dragText);
            $("#"+dragArray[y]).draggable({
               cursor: "crosshair",
-              revert: 'invalid'
+              revert: 'invalid',
+              start: function(event, ui){
+                 responsiveVoice.speak(event.target.id);
+              }
            });
           }
 
@@ -155,12 +171,16 @@
 
         })
 
-  </script>
-<body style="background-color:#5D6D7E">
+
+</script>
+<body style="background-color:#7FDBFF">
 
 <div class="counting">
   <div class="container1">
-    <h1> COUNT BY <span id="countBy"></span>'s</h1>
+    <div class="row">
+      <h1> COUNT BY <span id="countBy"></span>'s</h1>
+    </div>
+
     <div>
       <button id="playagain" type="button" class="btn btn-success btn-lg">Play Again</button>
     </div>
