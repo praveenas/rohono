@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src='//vws.responsivevoice.com/v/e?key=7xDYr79A'></script>
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+    <style>
+
+        .counting{
+        background-color:#7FDBFF;
+        //font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
+        padding: 50px;
+        }
+        .congratulations {
+        color:red;
+        }
+        #playagain{
+        display: none;
+        // width: 100px;
+        margin-top: 20px;
+        }
+        .btn-lg{
+        width:100%
+        }
+        .container1{
+        margin: 10px;
+        }
+
+    </style>
+</head>
+<script>
+
+        $(function () {
+          var audioElement = document.createElement('audio');
+          audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+
+          $('#playagain').click(function() {
+                location.reload();
+          });
+          var x1 = Math.floor(Math.random() * Math.floor(100))
+          var x2 = Math.floor(Math.random() * Math.floor(100))
+
+          $("#equation").html(x1+" + "+x2+" = ");
+          $( "#answer" ).keyup(function() {
+                if(this.value === (x1+x2)+""){
+                  $(".congratulations").html('<div><h2>CONGRATULATIONS!</div>');
+                  audioElement.play();
+                  $('#playagain').show();
+                }
+          });
+        })
+
+</script>
+<body style="background-color:#7FDBFF">
+
+<div class="counting">
+    <div class="container1">
+
+        <div class="row">
+            <h1><span id="equation"></span></h1>
+
+            <h1><input type="number" id="answer"/></h1>
+        </div>
+        <div class="row">
+            <div class="congratulations"></div>
+        </div>
+        <div class="row">
+            <button id="playagain" type="button" class="btn btn-success btn-lg">Play Again</button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

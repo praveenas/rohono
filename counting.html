@@ -15,12 +15,16 @@
   <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
   <style>
 
-    .block {
+    .block, .hint {
       width: 59.7917px;
       margin: 2px;
       border: 1px solid #001f3f;
       border-radius: 10px;
       font-weight: bold;
+    }
+
+    .hint {
+      width: 159.7917px;
     }
 
     .dragblock {
@@ -95,13 +99,17 @@
             $('#playagain').click(function() {
                 location.reload();
             });
-            var text = i%countBy ==0 ? "?" : (i < 10 ? i : i) ;
+            var text = i%countBy ==0 ? "?" : i ;
             var clazz =  i%countBy == 0 ? "alert-secondary" : "alert-light";
+
             var dropText = "<div id='drop"+i+"' class='block text-center alert "+clazz+"'>"+text+"</div>"
 
             $("#dropRow"+Math.ceil(i/countBy)).append(dropText);
 
             if(i%countBy == 0){
+
+              $("#dropRow"+Math.ceil(i/countBy)).append("<div id='drop"+i+"' class='hint block text-center alert alert-warning'>  "+countBy+" * "+Math.ceil(i/countBy)+"</div>" );
+
               $("#drop"+i).droppable({
                   accept: "#"+i,
                   activeClass: "alert-success",
