@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src='//vws.responsivevoice.com/v/e?key=7xDYr79A'></script>
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+    <style>
+
+        html,
+        body {
+        height: 100%;
+        background-color: #7FDBFF;
+        }
+
+        body {
+        color: #fff;
+        }
+
+        .cover-container {
+        max-width: 42em;
+        }
+
+        .cover-heading {
+        font-size: 5.00rem;
+        }
+
+        #congratulations {
+        color: #7F86FF;
+        }
+        #playagain{
+        display: none;
+        margin-top: 20px;
+        }
+        .btn-lg{
+        width:100%;
+        background-color: #7F86FF;
+        color: #fff;
+        }
+
+    </style>
+</head>
+<script>
+
+        $(function () {
+          var audioElement = document.createElement('audio');
+          audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+
+          var url = new URL(window.location);
+
+
+          var operators = ["+", "-", "x", "/"];
+          var operator = operator(url.searchParams.get("operator"));
+
+          $('#playagain').click(function() {
+                location.reload();
+          });
+
+          var x1 = Math.floor(Math.random() * Math.floor(100));
+
+          var x2Floor = operator === "-" || operator === "/" ? x1 : 100;
+          var x2 = Math.floor(Math.random() * Math.floor(x2Floor));
+
+          if(operator === "/"){
+          x2 = Math.max(x2,1);
+          x1 = Math.max(x2, (x1 - (x1%x2) ));
+          }
+
+          $("#equation").html(x1+" "+operator+" "+x2+" = ");
+          $("#answer").keyup(function() {
+                if(this.value === answer(x1,x2,operator)+""){
+                  $("#congratulations").html('CONGRATULATIONS!');
+                  audioElement.play();
+                  $('#playagain').show();
+                }
+          });
+
+          function answer(x1, x2, operator){
+            switch(operator){
+                case "+" : return x1+x2;
+                case "-" : return x1-x2;
+                case "x" : return x1*x2;
+                case "/" : return x1/x2;
+            }
+          }
+
+          function operator(param){
+            switch(param){
+                case "add" : return "+";
+                case "subtract" : return "-";
+                case "multiply" : return "x";
+                case "divide" : return "/";
+                default : return operators[Math.floor(Math.random() * Math.floor(3))];
+            }
+          }
+
+        })
+
+
+
+
+</script>
+<body class="text-center">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main role="main" class="inner cover">
+
+        <div class="row">
+            <h1 class="cover-heading" id="equation"></h1>
+
+            <h1><input type="number" id="answer"/></h1>
+        </div>
+        <div class="row">
+            <h1 class="cover-heading" id="congratulations"></h1>
+        </div>
+        <div class="row">
+            <button id="playagain" type="button" class="btn btn-lg"><h1 class="cover-heading"> Play Again</h1></button>
+        </div>
+</div>
+</div>
+</body>
+</html>

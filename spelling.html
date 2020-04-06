@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src='//vws.responsivevoice.com/v/e?key=7xDYr79A'></script>
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+    <style>
+
+        html,
+        body {
+        height: 100%;
+        background-color: #7FDBFF;
+        }
+
+        body {
+        color: #fff;
+        }
+
+        .cover-container {
+        max-width: 42em;
+        }
+
+        .cover-heading {
+        font-size: 5.00rem;
+        }
+
+        #congratulations {
+        color: #7F86FF;
+        }
+        #playagain{
+        display: none;
+        margin-top: 20px;
+        }
+        .btn-lg{
+        width:100%;
+        background-color: #7F86FF;
+        color: #fff;
+        }
+
+        .block {
+        width: 100px;
+        margin: 2px;
+        border: 1px solid #001f3f;
+        border-radius: 10px;
+        font-size: 5.00rem;
+        }
+
+        .hint{
+        background-color: #FFA37F;
+        }
+
+        .light{
+        color: #CCF1FF;
+        text-decoration-style: dashed;
+        }
+
+        .dragblock {
+        width: 100px;
+        margin: 2px;
+        border: 1px dotted #001f3f;
+        border-radius: 10px;
+        font-size: 5.00rem;
+        }
+
+        #dropContainer{
+        //width: 700px;
+        //border: 1px solid red;
+        }
+
+        #dragContainer{
+        //width: 200px;
+        //border: 1px solid red;
+        }
+
+        .counting{
+        <!--background-color:#7FDBFF;-->
+        //font-family: "proxima-nova-soft", "Proxima Nova Soft", Helvetica, Arial, sans-serif;
+        padding: 50px;
+        }
+
+        #playagain{
+        display: none;
+        // width: 100px;
+        margin-top: 20px;
+        }
+        .btn-lg{
+        width:100%
+        }
+        .container1{
+        margin: 10px;
+        }
+
+
+    </style>
+</head>
+<script>
+
+        $(function () {
+
+
+
+          var words = ["look","and","make","away","me","big","my","blue","not","can","one","come","play","down","red","find","run","for","said","funny","see","go","the","help","three","here","to","two","in","up","is","we","it","where","jump","yellow","little","you"];
+          var url = new URL(window.location);
+          var word = url.searchParams.get("word")?url.searchParams.get("word") : words[Math.floor(Math.random() * Math.floor(words.length))];
+          var shuffleParam = url.searchParams.get("shuffle");
+           $('#playagain').click(function() {
+                location.reload();
+            });
+
+          var indices = [];
+          $("#word").html(word);
+
+          var audioElement = document.createElement('audio');
+          audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+
+          for(var i=0; i < word.length; i++){
+                indices.push(i);
+                var dropRow = "<div id='dropRow' class='row'></div>";
+                $("#dropContainer").append(dropRow);
+
+                var dropText = "<div id='drop"+i+"' class='block text-center light'>-</div>"
+                $("#dropRow").append(dropText);
+                $("#drop"+i).droppable({
+                  accept: "#"+i,
+                  activeClass: "hint",
+                  hoverClass: "hint",
+
+                  addClasses: "false",
+                  drop: function (event, ui) {
+                      var index = event.target.id.replace("drop","");
+                      $("#"+event.target.id).html(word[index]).addClass("hint");
+                      $("#"+index).hide();
+                      if($('.dragblock:visible').length == 0) {
+                        responsiveVoice.speak(word);
+                        $("#dragcontent").html('<div><h2>CONGRATULATIONS!</div>');
+                         audioElement.play();
+                         $("#playagain").show();
+                      }
+                  },
+                  deactivate: function(event,ui){
+                    var index = event.target.id.replace("drop","");
+                    if($("#"+event.target.id).html() === word[index]){
+                      $("#"+event.target.id).addClass("hint");
+                    }
+
+                  }
+                });
+
+         }
+
+         while(indices.length > 0 ){
+
+               var index = shuffleParam==="true"?Math.floor(Math.random() * Math.floor(indices.length)):0;
+               var dragText = "<div id='"+indices[index]+"' class='drag dragblock text-center alert alert-light'>"+word[indices[index]]+"</div>"
+               var dragRow = "<div id='dragRow' class='row'></div>";
+               $("#dragContainer").append(dragRow);
+               $("#dragRow").append(dragText);
+               $("#"+indices[index]).draggable({
+                  cursor: "crosshair",
+                  revert: 'invalid',
+                  start: function(event, ui){
+                     responsiveVoice.speak(word[event.target.id]);
+                  }
+               });
+               indices.splice(index,1);
+               }
+        })
+</script>
+<body class="text-center">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <main role="main" class="inner cover">
+        <div class="row">
+            <h1 class="cover-heading" id="word"></h1>
+        </div>
+        <div class="row">
+            <p id="dropContainer" class="lead">
+            </p>
+        </div>
+        <div class="row">
+            <p id="dragContainer" class="lead">
+            </p>
+        </div>
+        <div>
+            <button id="playagain" type="button" class="btn btn-lg"><h1 class="cover-heading"> Play Again</h1></button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
