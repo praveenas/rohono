@@ -142,7 +142,7 @@
                       $("#"+index).hide();
                       if($('.dragblock:visible').length == 0) {
                         responsiveVoice.speak(word);
-                        $("#dragcontent").html('<div><h2>CONGRATULATIONS!</div>');
+                        $("#congratulations").html('CONGRATULATIONS!');
                          audioElement.play();
                          $("#playagain").show();
                       }
@@ -190,6 +190,9 @@
         <div class="row">
             <p id="dragContainer" class="lead">
             </p>
+        </div>
+        <div class="row">
+            <h1 class="cover-heading" id="congratulations"></h1>
         </div>
         <div>
             <button id="playagain" type="button" class="btn btn-lg"><h1 class="cover-heading"> Play Again</h1></button>
