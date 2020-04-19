@@ -24,11 +24,7 @@
         <div class="rate-value">1</div>
         <div class="clearfix"></div>
     </div>
-    <div>
-        <label for="pitch">Pitch</label><input type="range" min="0" max="2" value="1" step="0.1" id="pitch">
-        <div class="pitch-value">1</div>
-        <div class="clearfix"></div>
-    </div>
+
     <select>
 
     </select>
@@ -44,8 +40,6 @@ var inputForm = document.querySelector('form');
 var inputTxt = document.querySelector('.txt');
 var voiceSelect = document.querySelector('select');
 
-var pitch = document.querySelector('#pitch');
-var pitchValue = document.querySelector('.pitch-value');
 var rate = document.querySelector('#rate');
 var rateValue = document.querySelector('.rate-value');
 
@@ -112,9 +106,6 @@ inputForm.onsubmit = function(event) {
   inputTxt.blur();
 }
 
-pitch.onchange = function() {
-  pitchValue.textContent = pitch.value;
-}
 
 rate.onchange = function() {
   rateValue.textContent = rate.value;
