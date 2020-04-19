@@ -124,13 +124,12 @@
           var word = url.searchParams.get("word")?url.searchParams.get("word") : words[Math.floor(Math.random() * Math.floor(words.length))];
           var shuffleParam = url.searchParams.get("shuffle");
            $('#playagain').click(function() {
+                speak(word);
                 location.reload();
             });
 
           var indices = [];
           $("#word").html(word);
-
-
           for(var i=0; i < word.length; i++){
             indices.push(i);
             var dropRow = "<div id='dropRow' class='row'></div>";
