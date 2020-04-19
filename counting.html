@@ -83,6 +83,7 @@
             utterThis.onerror = function (event) {
               console.error('SpeechSynthesisUtterance.onerror');
             }
+            utterThis.rate = 0.8;
             synth.speak(utterThis);
           }
 
