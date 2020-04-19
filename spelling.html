@@ -130,8 +130,6 @@
           var indices = [];
           $("#word").html(word);
 
-          var audioElement = document.createElement('audio');
-          audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
 
           for(var i=0; i < word.length; i++){
             indices.push(i);
@@ -151,17 +149,16 @@
             $("#"+event.target.id).html(word[index]).addClass("hint");
             $("#"+index).hide();
             if($('.dragblock:visible').length == 0) {
-            speak(word);
-            $("#congratulations").html('CONGRATULATIONS!');
-            audioElement.play();
-            $("#playagain").show();
+                speak(word);
+                $("#congratulations").html('CONGRATULATIONS!');
+                $("#playagain").show();
             }
             },
             deactivate: function(event,ui){
-            var index = event.target.id.replace("drop","");
-            if($("#"+event.target.id).html() === word[index]){
-            $("#"+event.target.id).addClass("hint");
-            }
+              var index = event.target.id.replace("drop","");
+              if($("#"+event.target.id).html() === word[index]){
+                $("#"+event.target.id).addClass("hint");
+              }
 
             }
             });
