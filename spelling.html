@@ -104,6 +104,16 @@
 <script>
        var synth = window.speechSynthesis;
         $(function () {
+           $('#playagain').click(function() {
+
+                speak($("#word").html());
+                play();
+            });
+            $('#sd').click(function() {
+            alert($("#word").html());
+            speak($("#word").html());
+         });
+         play();
           function speak(text){
             //if (synth.speaking) {
               //  console.error('speechSynthesis.speaking');
@@ -120,14 +130,18 @@
             synth.speak(utterThis);
 
           }
+          function play(){
+
+           $("#playagain").hide();
+           $("#dropContainer").html("<div></div>");
+           $("#dragContainer").html("<div></div>");
+           $("#congratulations").html("");
+
           var words = ["look","and","make","away","me","big","my","blue","not","can","one","come","play","down","red","find","run","for","said","funny","see","go","the","help","three","here","to","two","in","up","is","we","it","where","jump","yellow","little","you"];
           var url = new URL(window.location);
           var word = url.searchParams.get("word")?url.searchParams.get("word") : words[Math.floor(Math.random() * Math.floor(words.length))];
           var shuffleParam = url.searchParams.get("shuffle");
-           $('#playagain').click(function() {
-                speak(word);
-                location.reload();
-            });
+
 
           var indices = [];
           $("#word").html(word);
@@ -181,9 +195,7 @@
            indices.splice(index,1);
          }
 
-         $('#sd').click(function() {
-            speak(word);
-         });
+         }
         })
 </script>
 <body class="text-center">
