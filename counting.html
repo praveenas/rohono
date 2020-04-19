@@ -11,8 +11,6 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-  <script src='//vws.responsivevoice.com/v/e?key=7xDYr79A'></script>
-  <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
   <style>
 
     .block, .hint {
@@ -70,8 +68,23 @@
 </head>
 <script>
 
-        $(function () {
+        var synth = window.speechSynthesis;
 
+        $(function () {
+          function speak(text){
+            if (synth.speaking) {
+              console.error('speechSynthesis.speaking');
+              return;
+            }
+            var utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.onend = function (event) {
+              console.log('SpeechSynthesisUtterance.onend');
+            }
+            utterThis.onerror = function (event) {
+              console.error('SpeechSynthesisUtterance.onerror');
+            }
+            synth.speak(utterThis);
+          }
 
           var url = new URL(window.location);
           var countByParam = url.searchParams.get("countBy");
@@ -153,7 +166,7 @@
               cursor: "crosshair",
               revert: 'invalid',
               start: function(event, ui){
-                 responsiveVoice.speak(event.target.id);
+                 speak(event.target.id);
               }
            });
           }
