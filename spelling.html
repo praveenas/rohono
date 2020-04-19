@@ -104,11 +104,23 @@
     </style>
 </head>
 <script>
-
+       var synth = window.speechSynthesis;
         $(function () {
+          function speak(text){
+            if (synth.speaking) {
+                console.error('speechSynthesis.speaking');
+                return;
+            }
+            var utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.onend = function (event) {
+                console.log('SpeechSynthesisUtterance.onend');
+            }
+            utterThis.onerror = function (event) {
+                console.error('SpeechSynthesisUtterance.onerror');
+            }
+            synth.speak(utterThis);
 
-
-
+          }
           var words = ["look","and","make","away","me","big","my","blue","not","can","one","come","play","down","red","find","run","for","said","funny","see","go","the","help","three","here","to","two","in","up","is","we","it","where","jump","yellow","little","you"];
           var url = new URL(window.location);
           var word = url.searchParams.get("word")?url.searchParams.get("word") : words[Math.floor(Math.random() * Math.floor(words.length))];
@@ -124,38 +136,37 @@
           audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
 
           for(var i=0; i < word.length; i++){
-                indices.push(i);
-                var dropRow = "<div id='dropRow' class='row'></div>";
-                $("#dropContainer").append(dropRow);
+            indices.push(i);
+            var dropRow = "<div id='dropRow' class='row'></div>";
+            $("#dropContainer").append(dropRow);
 
-                var dropText = "<div id='drop"+i+"' class='block text-center light'>-</div>"
-                $("#dropRow").append(dropText);
-                $("#drop"+i).droppable({
-                  accept: "#"+i,
-                  activeClass: "hint",
-                  hoverClass: "hint",
+            var dropText = "<div id='drop"+i+"' class='block text-center light'>-</div>"
+            $("#dropRow").append(dropText);
+            $("#drop"+i).droppable({
+            accept: "#"+i,
+            activeClass: "hint",
+            hoverClass: "hint",
 
-                  addClasses: "false",
-                  drop: function (event, ui) {
-                      var index = event.target.id.replace("drop","");
-                      $("#"+event.target.id).html(word[index]).addClass("hint");
-                      $("#"+index).hide();
-                      if($('.dragblock:visible').length == 0) {
-                        responsiveVoice.speak(word);
-                        $("#congratulations").html('CONGRATULATIONS!');
-                         audioElement.play();
-                         $("#playagain").show();
-                      }
-                  },
-                  deactivate: function(event,ui){
-                    var index = event.target.id.replace("drop","");
-                    if($("#"+event.target.id).html() === word[index]){
-                      $("#"+event.target.id).addClass("hint");
-                    }
+            addClasses: "false",
+            drop: function (event, ui) {
+            var index = event.target.id.replace("drop","");
+            $("#"+event.target.id).html(word[index]).addClass("hint");
+            $("#"+index).hide();
+            if($('.dragblock:visible').length == 0) {
+            speak(word);
+            $("#congratulations").html('CONGRATULATIONS!');
+            audioElement.play();
+            $("#playagain").show();
+            }
+            },
+            deactivate: function(event,ui){
+            var index = event.target.id.replace("drop","");
+            if($("#"+event.target.id).html() === word[index]){
+            $("#"+event.target.id).addClass("hint");
+            }
 
-                  }
-                });
-
+            }
+            });
          }
 
          while(indices.length > 0 ){
@@ -169,7 +180,7 @@
                   cursor: "crosshair",
                   revert: 'invalid',
                   start: function(event, ui){
-                     responsiveVoice.speak(word[event.target.id]);
+                     speak(word[event.target.id]);
                   }
                });
                indices.splice(index,1);
@@ -179,25 +190,25 @@
 <body class="text-center">
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <main role="main" class="inner cover">
-        <div class="row">
-            <h1 class="cover-heading" id="word"></h1>
-        </div>
-        <div class="row">
-            <p id="dropContainer" class="lead">
-            </p>
-        </div>
-        <div class="row">
-            <p id="dragContainer" class="lead">
-            </p>
-        </div>
-        <div class="row">
-            <h1 class="cover-heading" id="congratulations"></h1>
-        </div>
-        <div>
-            <button id="playagain" type="button" class="btn btn-lg"><h1 class="cover-heading"> Play Again</h1></button>
-        </div>
+  <main role="main" class="inner cover">
+    <div class="row">
+        <h1 class="cover-heading" id="word"></h1>
     </div>
+    <div class="row">
+        <p id="dropContainer" class="lead">
+        </p>
+    </div>
+    <div class="row">
+        <p id="dragContainer" class="lead">
+        </p>
+    </div>
+    <div class="row">
+        <h1 class="cover-heading" id="congratulations"></h1>
+    </div>
+    <div>
+        <button id="playagain" type="button" class="btn btn-lg"><h1 class="cover-heading"> Play Again</h1></button>
+    </div>
+  </main>
 </div>
 
 </body>
