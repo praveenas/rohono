@@ -105,10 +105,10 @@
        var synth = window.speechSynthesis;
         $(function () {
           function speak(text){
-            if (synth.speaking) {
-                console.error('speechSynthesis.speaking');
-                return;
-            }
+            //if (synth.speaking) {
+              //  console.error('speechSynthesis.speaking');
+              //  return;
+            //}
             var utterThis = new SpeechSynthesisUtterance(text);
             utterThis.onend = function (event) {
                 console.log('SpeechSynthesisUtterance.onend');
@@ -149,9 +149,9 @@
             $("#"+event.target.id).html(word[index]).addClass("hint");
             $("#"+index).hide();
             if($('.dragblock:visible').length == 0) {
-                speak(word);
                 $("#congratulations").html('CONGRATULATIONS!');
                 $("#playagain").show();
+                speak(word);
             }
             },
             deactivate: function(event,ui){
