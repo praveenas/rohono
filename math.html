@@ -51,36 +51,10 @@
 <script>
 
 $(function () {
-  var audioElement = document.createElement('audio');
-  audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
-
-  var url = new URL(window.location);
-
-
   var operators = ["+", "-", "x", "/"];
-  var operator = operator(url.searchParams.get("operator"));
 
   $('#playagain').click(function() {
-        location.reload();
-  });
-
-  var x1 = Math.floor(Math.random() * Math.floor(100));
-
-  var x2Floor = operator === "-" || operator === "/" ? x1 : 100;
-  var x2 = Math.floor(Math.random() * Math.floor(x2Floor));
-
-  if(operator === "/"){
-    x2 = Math.max(x2,1);
-    x1 = Math.max(x2, (x1 - (x1%x2) ));
-  }
-
-  $("#equation").html(x1+" "+operator+" "+x2+" = ");
-  $("#answer").keyup(function() {
-    if(this.value === answer(x1,x2,operator)+""){
-      $("#congratulations").html('CONGRATULATIONS!');
-      audioElement.play();
-      $('#playagain').show();
-    }
+      play();
   });
 
   function answer(x1, x2, operator){
@@ -92,7 +66,7 @@ $(function () {
     }
   }
 
-  function operator(param){
+  function getOperator(param){
     switch(param){
         case "add" : return "+";
         case "subtract" : return "-";
@@ -102,6 +76,42 @@ $(function () {
     }
   }
 
+  function play() {
+
+    $("#playagain").hide();
+    $("#congratulations").html("<div></div>");
+    $("#equation").html("");
+    $("#answer").html("");
+    $(".input").val("");
+
+    var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
+
+    var url = new URL(window.location);
+
+    var operator = getOperator(url.searchParams.get("operator"));
+
+    var x1 = Math.floor(Math.random() * Math.floor(100));
+
+    var x2Floor = operator === "-" || operator === "/" ? x1 : 100;
+    var x2 = Math.floor(Math.random() * Math.floor(x2Floor));
+
+    if(operator === "/"){
+      x2 = Math.max(x2,1);
+      x1 = Math.max(x2, (x1 - (x1%x2) ));
+    }
+
+    $("#equation").html(x1+" "+operator+" "+x2+" = ");
+    $("#answer").keyup(function() {
+      if(this.value === answer(x1,x2,operator)+""){
+        $("#congratulations").html('CONGRATULATIONS!');
+        audioElement.play();
+        $('#playagain').show();
+      }
+    });
+  }
+
+  play();
 })
 
 </script>
