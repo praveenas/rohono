@@ -82,6 +82,10 @@ $(function() {
     synth.speak(utterThis);
   }
 
+   $('#playagain').click(function() {
+        play();
+   });
+
   function play() {
 
     $("#playagain").hide();
@@ -112,9 +116,6 @@ $(function() {
     var dragArray = [];
     for (i = 1; i < max + 1; i++) {
 
-      $('#playagain').click(function() {
-        play();
-      });
       var text = i % countBy == 0 ? "?" : i;
       var clazz = i % countBy == 0 ? "alert-secondary" : "alert-light";
 
