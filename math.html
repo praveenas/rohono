@@ -84,9 +84,6 @@ $(function () {
     $("#answer").html("");
     $(".input").val("");
 
-    var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
-
     var url = new URL(window.location);
 
     var operator = getOperator(url.searchParams.get("operator"));
@@ -105,7 +102,6 @@ $(function () {
     $("#answer").keyup(function() {
       if(this.value === answer(x1,x2,operator)+""){
         $("#congratulations").html('CONGRATULATIONS!');
-        audioElement.play();
         $('#playagain').show();
       }
     });

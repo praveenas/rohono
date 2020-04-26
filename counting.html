@@ -102,9 +102,6 @@ $(function() {
 
     $("#countBy").html(countBy);
 
-    var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'http://soundbible.com/mp3/Cheering-SoundBible.com-1115515042.mp3');
-
     var j;
     for (j = 1; j < (max / countBy + 1); j++) {
       var dropRow = "<div id='dropRow" + j + "' class='row'></div>";
@@ -140,7 +137,6 @@ $(function() {
             speak(countBy + " times " + (index / countBy) + " is " + index);
             if ($('.dragblock:visible').length == 0) {
               $("#dragcontent").html('<div><h2>CONGRATULATIONS!</div>');
-              audioElement.play();
               $("#playagain").show();
             }
           },
