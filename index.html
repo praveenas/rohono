@@ -29,6 +29,9 @@
           }
           utterThis.onerror = function(event) {
             console.error('SpeechSynthesisUtterance.onerror');
+            if(callback){
+              callback();
+            }
           }
           utterThis.rate = 1;
           synth.speak(utterThis);
