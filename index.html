@@ -14,7 +14,7 @@
     <script>
       var synth = window.speechSynthesis;
       $(function () {
-         var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple'];
+         var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza'];
         $('#playagain').click(function() {
       
           location.reload();
@@ -150,10 +150,74 @@
           width: 100%;
         }
 
+
+        /*
+        * Header
+        */
+        .masthead {
+        margin-bottom: 2rem;
+        }
+
+        .masthead-brand {
+        margin-bottom: 0;
+        }
+
+        .nav-masthead .nav-link {
+        padding: .25rem 0;
+        font-weight: 700;
+        color: rgba(255, 255, 255, .5);
+        background-color: transparent;
+        border-bottom: .25rem solid transparent;
+        }
+
+        .nav-masthead .nav-link:hover,
+        .nav-masthead .nav-link:focus {
+        border-bottom-color: rgba(255, 255, 255, .25);
+        }
+
+        .nav-masthead .nav-link + .nav-link {
+        margin-left: 1rem;
+        }
+
+        .nav-masthead .active {
+        color: #fff;
+        border-bottom-color: #fff;
+        }
+
+        @media (min-width: 48em) {
+        .masthead-brand {
+        float: left;
+        }
+        .nav-masthead {
+        float: right;
+        }
+        }
+
+
+        /*
+        * Cover
+        */
+        .cover {
+        padding-top: 1.5rem;
+        }
+
+
+
     </style>
 </head>
-<body>
+<body style="background-color:#7FDBFF">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <!--<h3 class="masthead-brand">Rohono</h3>-->
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link" href="./math.html">Math</a>
+                    <a class="nav-link" href="./counting.html">Counting</a>
+                    <a class="nav-link" href="./spelling.html">Spelling</a>
+                </nav>
+            </div>
+        </header>
         <main role="main" class="inner cover">
             <div>
                 <button id="playagain" type="button" class="btn btn-lg">
