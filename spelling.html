@@ -125,13 +125,20 @@
     });
     play();
 
-    function speak(text) {
+    function speak(text, callback) {
       var utterThis = new SpeechSynthesisUtterance(text);
+      if (synth.speaking) {
+        console.error('speechSynthesis.speaking');
+        if(callback){ callback(); }
+        return;
+      }
       utterThis.onend = function(event) {
         console.log('SpeechSynthesisUtterance.onend');
+        if(callback){ callback(); }
       }
       utterThis.onerror = function(event) {
         console.error('SpeechSynthesisUtterance.onerror');
+        if(callback){ callback(); }
       }
       utterThis.rate = 0.8;
       synth.speak(utterThis);
@@ -140,6 +147,7 @@
 
     function play() {
 
+      synth.cancel();
       $("#playagain").hide();
       $("#dropContainer").html("<div></div>");
       $("#dragContainer").html("<div></div>");
@@ -171,9 +179,10 @@
             $("#" + event.target.id).html(word[index]).addClass("hint");
             $("#" + index).hide();
             if ($('.dragblock:visible').length == 0) {
-              $("#congratulations").html('CONGRATULATIONS!');
-              speak($("#word").html());
-              $("#playagain").show();
+              speak($("#word").html(), function() {
+               $("#congratulations").html('CONGRATULATIONS!');
+               $("#playagain").show();
+              });
             }
           },
           deactivate: function(event, ui) {

@@ -39,13 +39,13 @@
         }
       
         function dismiss() {
-
-        //  $("#game").hide();
           $("#playagain").show();
         }
-      
+
         function play(){
+
           $("#playagain").hide();
+          $("#game").show();
           $('#spanObject').html("");
 
           var url = new URL(window.location);
@@ -82,11 +82,16 @@
            $("#" + person).droppable({
               //activeClass: "hint",
               drop: function (event, ui) {
+                 $("#" + person).droppable('disable');
                  speak("The " + person + " has the " + $(".objectText").text(), dismiss);
               }
-          });
+           });
+
+           $("#" + person).droppable('enable');
+
        }
-       play();
+       $("#game").hide();
+       $("#playagain").show();
 
       });
       
@@ -219,7 +224,7 @@
         <main role="main" class="inner cover">
             <div>
                 <button id="playagain" type="button" class="btn btn-lg">
-                    <h1 class="cover-heading"> Play Again</h1>
+                    <h1 class="cover-heading"> Play </h1>
                 </button>
             </div>
             <div id="game">
