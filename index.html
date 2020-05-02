@@ -17,9 +17,14 @@
     var synth = window.speechSynthesis;
     var initialized = false;
     $(function () {
-      var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza'];
+      var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza', 'block'];
       $('#playagain').click(function () {
 
+        play();
+      });
+      $('#first').click(function () {
+        speak("Let's play");
+        $('#first').hide();
         play();
       });
       function speak(text, callback) {
@@ -52,10 +57,6 @@
       }
 
       function play() {
-        if (!initialized) {
-          speak("Let's play");
-          initialized = true;
-        }
 
         $("#playagain").hide();
         $("#game").show();
@@ -103,7 +104,8 @@
 
       }
 
-      play();
+        $("#game").hide();
+        $("#first").show();
 
     });
 
@@ -125,7 +127,7 @@
       margin-top: 100px;
     }
 
-    #playagain:hover {
+    .playagain:hover {
       animation: shake 0.5s;
       animation-iteration-count: 1;
       background-color: #FFA37F;
@@ -283,11 +285,11 @@
     </div>
   </header>
   <main role="main" class="inner cover">
-    <!--<div>-->
-    <!--<button id="playagain" type="button" class="btn btn-lg">-->
-    <!--<h1 class="cover-heading"> Play </h1>-->
-    <!--</button>-->
-    <!--</div>-->
+    <div>
+      <button id="first" type="button" class="btn btn-lg">
+        <h1 class="cover-heading"> Play </h1>
+      </button>
+    </div>
     <div id="game">
       <div class="row">
         <h1>
@@ -324,8 +326,6 @@
           </button>
         </div>
       </div>
-
-
     </div>
   </main>
 </div>
