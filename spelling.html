@@ -1,126 +1,148 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
-    <style>
-        html, body {
-          height: 100%;
-          background-color: #7FDBFF;
-        }
-        body {
-          color: #fff;
-        }
-        .cover-container {
-          max-width: 42em;
-        }
-        .cover-heading {
-          font-size: 5.00rem;
-        }
-        #congratulations {
-          color: #7F86FF;
-        }
-        .btn-lg {
-          width:100%;
-          background-color: #7F86FF;
-          color: #fff;
-        }
-        .block {
-          width: 100px;
-          margin: 2px;
-          border: 1px solid #001f3f;
-          border-radius: 10px;
-          font-size: 5.00rem;
-        }
-        .hint {
-          background-color: #FFA37F;
-        }
-        .light {
-          color: #CCF1FF;
-          text-decoration-style: dashed;
-        }
-        .dragblock {
-          width: 100px;
-          margin: 2px;
-          border: 1px dotted #001f3f;
-          border-radius: 10px;
-          font-size: 5.00rem;
-        }
-        #playagain {
-          display: none;
-          margin-top: 20px;
-        }
-        .btn-lg{
-          width:100%
-        }
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+          integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
 
-        /*
-        * Header
-        */
-        .masthead {
-        margin-bottom: 2rem;
-        }
+  <style>
+    html, body {
+      height: 100%;
+      background-color: #7FDBFF;
+    }
 
-        .masthead-brand {
-        margin-bottom: 0;
-        }
+    body {
+      color: #fff;
+    }
 
-        .nav-masthead .nav-link {
-        padding: .25rem 0;
-        font-weight: 700;
-        color: rgba(255, 255, 255, .5);
-        background-color: transparent;
-        border-bottom: .25rem solid transparent;
-        }
+    .cover-container {
+      max-width: 42em;
+    }
 
-        .nav-masthead .nav-link:hover,
-        .nav-masthead .nav-link:focus {
-        border-bottom-color: rgba(255, 255, 255, .25);
-        }
+    .cover-heading {
+      font-size: 5.00rem;
+    }
 
-        .nav-masthead .nav-link + .nav-link {
-        margin-left: 1rem;
-        }
+    .btn-lg {
+      width: 100%;
+      background-color: #7F86FF;
+      color: #fff;
+    }
 
-        .nav-masthead .active {
-        color: #fff;
-        border-bottom-color: #fff;
-        }
+    .play {
+      float: right;
+      margin-left: 50px;
+      margin-top: 20px;
+    }
 
-        @media (min-width: 48em) {
-        .masthead-brand {
+    .block {
+      width: 100px;
+      margin: 2px;
+      border: 1px solid #001f3f;
+      border-radius: 10px;
+      font-size: 5.00rem;
+    }
+
+    .hint {
+      background-color: #FFA37F;
+    }
+
+    .light {
+      color: #CCF1FF;
+      text-decoration-style: dashed;
+    }
+
+    .dragblock {
+      width: 100px;
+      margin: 2px;
+      border: 1px dotted #001f3f;
+      border-radius: 10px;
+      font-size: 5.00rem;
+    }
+
+    #playagain {
+      display: none;
+    }
+
+    #playagain:hover {
+      animation: shake 0.5s;
+      animation-iteration-count: 1;
+      background-color: #FFA37F;
+    }
+
+    .btn-lg {
+      width: 100%;
+      background-color: #7F86FF;
+      color: #fff;
+    }
+
+    /*
+    * Header
+    */
+    .masthead {
+      margin-bottom: 2rem;
+    }
+
+    .masthead-brand {
+      margin-bottom: 0;
+    }
+
+    .nav-masthead .nav-link {
+      padding: .25rem 0;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .5);
+      background-color: transparent;
+      border-bottom: .25rem solid transparent;
+    }
+
+    .nav-masthead .nav-link:hover,
+    .nav-masthead .nav-link:focus {
+      border-bottom-color: rgba(255, 255, 255, .25);
+    }
+
+    .nav-masthead .nav-link + .nav-link {
+      margin-left: 1rem;
+    }
+
+    .nav-masthead .active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+
+    @media (min-width: 48em) {
+      .masthead-brand {
         float: left;
-        }
-        .nav-masthead {
+      }
+
+      .nav-masthead {
         float: right;
-        }
-        }
+      }
+    }
 
+    /*
+    * Cover
+    */
+    .cover {
+      padding-top: 1.5rem;
+    }
 
-        /*
-        * Cover
-        */
-        .cover {
-        padding-top: 1.5rem;
-        }
-
-    </style>
+  </style>
 </head>
 <script>
   var synth = window.speechSynthesis;
-  $(function() {
-    $('#playagain').click(function() {
+  $(function () {
+    $('#playagain').click(function () {
       play();
     });
-    $('#sd').click(function() {
+    $('#sd').click(function () {
       speak($("#word").html());
     });
     play();
@@ -129,16 +151,22 @@
       var utterThis = new SpeechSynthesisUtterance(text);
       if (synth.speaking) {
         console.error('speechSynthesis.speaking');
-        if(callback){ callback(); }
+        if (callback) {
+          callback();
+        }
         return;
       }
-      utterThis.onend = function(event) {
+      utterThis.onend = function (event) {
         console.log('SpeechSynthesisUtterance.onend');
-        if(callback){ callback(); }
+        if (callback) {
+          callback();
+        }
       }
-      utterThis.onerror = function(event) {
+      utterThis.onerror = function (event) {
         console.error('SpeechSynthesisUtterance.onerror');
-        if(callback){ callback(); }
+        if (callback) {
+          callback();
+        }
       }
       utterThis.rate = 0.8;
       synth.speak(utterThis);
@@ -153,7 +181,7 @@
       $("#dragContainer").html("<div></div>");
       $("#congratulations").html("");
 
-      var words = ["the", "be", "to", "of", "and", "in", "that", "have", "it", "for", "not", "on", "with", "he", "as", "you", "do", "at", "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my", "one", "all", "would", "there", "their", "what", "so", "up", "out", "if", "about", "who", "get", "which", "go", "me", "when", "make", "can", "like", "time", "no", "just", "him", "know", "take", "people", "into", "year", "your", "good", "some", "could", "them", "see", "other", "than", "then", "now", "look", "only", "come", "its", "over", "think", "also", "back", "after", "use", "two", "how", "our", "work", "first", "well", "way", "even", "new", "want", "because", "any", "these", "give", "day", "most", "us"];
+      var words = ["the", "be", "to", "of", "and", "in", "that", "have", "it", "for", "not", "on", "with", "he", "as", "you", "do", "at", "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my", "one", "all", "would", "there", "their", "what", "so", "up", "out", "if", "about", "who", "get", "which", "go", "me", "when", "make", "can", "like", "time", "no", "just", "him", "know", "take", "people", "into", "year", "your", "good", "some", "could", "them", "see", "other", "than", "then", "now", "look", "only", "come", "its", "over", "think", "also", "back", "after", "use", "two", "how", "our", "work", "first", "well", "way", "even", "new", "want", "any", "these", "give", "day", "most", "us", "red", "yellow", "green", "blue", "white", "black"];
       var url = new URL(window.location);
       var word = url.searchParams.get("word") ? url.searchParams.get("word") : words[Math.floor(Math.random() * Math.floor(words.length))];
       var shuffleParam = url.searchParams.get("shuffle");
@@ -174,18 +202,18 @@
           hoverClass: "hint",
 
           addClasses: "false",
-          drop: function(event, ui) {
+          drop: function (event, ui) {
             var index = event.target.id.replace("drop", "");
             $("#" + event.target.id).html(word[index]).addClass("hint");
             $("#" + index).hide();
             if ($('.dragblock:visible').length == 0) {
-              speak($("#word").html(), function() {
-               $("#congratulations").html('CONGRATULATIONS!');
-               $("#playagain").show();
+              speak($("#word").html(), function () {
+                confetti.start(1000);
+                $("#playagain").show();
               });
             }
           },
-          deactivate: function(event, ui) {
+          deactivate: function (event, ui) {
             var index = event.target.id.replace("drop", "");
             if ($("#" + event.target.id).html() === word[index]) {
               $("#" + event.target.id).addClass("hint");
@@ -205,7 +233,7 @@
         $("#" + indices[index]).draggable({
           cursor: "crosshair",
           revert: 'invalid',
-          start: function(event, ui) {
+          start: function (event, ui) {
             speak(word[event.target.id]);
           }
         });
@@ -214,47 +242,56 @@
 
     }
   })
-  </script>
+</script>
 <body class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="masthead">
-        <div class="inner">
-            <!--<h3 class="masthead-brand">Rohono</h3>-->
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link" href="./">Home</a>
-                <a class="nav-link" href="./math.html">Math</a>
-                <a class="nav-link" href="./counting.html">Counting</a>
-                <a class="nav-link active" href="./spelling.html">Spelling</a>
-            </nav>
-        </div>
-    </header>
-    <main role="main" class="inner cover">
-        <div id ="sd" class="row">
-            <h1 class="cover-heading" id="word"></h1>
-            <svg class="bi bi-volume-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M6.717 3.55A.5.5 0 017 4v8a.5.5 0 01-.812.39L3.825 10.5H1.5A.5.5 0 011 10V6a.5.5 0 01.5-.5h2.325l2.363-1.89a.5.5 0 01.529-.06zM6 5.04L4.312 6.39A.5.5 0 014 6.5H2v3h2a.5.5 0 01.312.11L6 10.96V5.04z" clip-rule="evenodd"></path>
-                <path d="M11.536 14.01A8.473 8.473 0 0014.026 8a8.473 8.473 0 00-2.49-6.01l-.708.707A7.476 7.476 0 0113.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"></path>
-                <path d="M10.121 12.596A6.48 6.48 0 0012.025 8a6.48 6.48 0 00-1.904-4.596l-.707.707A5.483 5.483 0 0111.025 8a5.483 5.483 0 01-1.61 3.89l.706.706z"></path>
-                <path d="M8.707 11.182A4.486 4.486 0 0010.025 8a4.486 4.486 0 00-1.318-3.182L8 5.525A3.489 3.489 0 019.025 8 3.49 3.49 0 018 10.475l.707.707z"></path>
-            </svg>
-        </div>
-        <div class="row">
-            <p id="dropContainer" class="lead">
-            </p>
-        </div>
-        <div class="row">
-            <p id="dragContainer" class="lead">
-            </p>
-        </div>
-        <div class="row">
-            <h1 class="cover-heading" id="congratulations"></h1>
-        </div>
-        <div>
-            <button id="playagain" type="button" class="btn btn-lg">
-                <h1 class="cover-heading"> Play Again</h1>
-            </button>
-        </div>
-    </main>
+  <header class="masthead">
+    <div class="inner">
+      <!--<h3 class="masthead-brand">Rohono</h3>-->
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link" href="./">Home</a>
+        <a class="nav-link" href="./math.html">Math</a>
+        <a class="nav-link" href="./counting.html">Counting</a>
+        <a class="nav-link active" href="./spelling.html">Spelling</a>
+      </nav>
+    </div>
+  </header>
+  <main role="main" class="inner cover">
+    <div id="sd" class="row">
+      <h1 class="cover-heading" id="word"></h1>
+      <svg class="bi bi-volume-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+           xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+              d="M6.717 3.55A.5.5 0 017 4v8a.5.5 0 01-.812.39L3.825 10.5H1.5A.5.5 0 011 10V6a.5.5 0 01.5-.5h2.325l2.363-1.89a.5.5 0 01.529-.06zM6 5.04L4.312 6.39A.5.5 0 014 6.5H2v3h2a.5.5 0 01.312.11L6 10.96V5.04z"
+              clip-rule="evenodd"></path>
+        <path
+            d="M11.536 14.01A8.473 8.473 0 0014.026 8a8.473 8.473 0 00-2.49-6.01l-.708.707A7.476 7.476 0 0113.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"></path>
+        <path
+            d="M10.121 12.596A6.48 6.48 0 0012.025 8a6.48 6.48 0 00-1.904-4.596l-.707.707A5.483 5.483 0 0111.025 8a5.483 5.483 0 01-1.61 3.89l.706.706z"></path>
+        <path
+            d="M8.707 11.182A4.486 4.486 0 0010.025 8a4.486 4.486 0 00-1.318-3.182L8 5.525A3.489 3.489 0 019.025 8 3.49 3.49 0 018 10.475l.707.707z"></path>
+      </svg>
+    </div>
+    <div class="row">
+      <div id="dropContainer" class="lead">
+      </div>
+      <div class="play">
+        <button id="playagain" type="button" class="btn btn-lg">
+          <svg class="bi bi-play-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <p id="dragContainer" class="lead">
+      </p>
+
+    </div>
+
+  </main>
 </div>
 </body>
 </html>
