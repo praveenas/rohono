@@ -13,6 +13,7 @@
             crossorigin="anonymous"></script>
     <script>
       var synth = window.speechSynthesis;
+      var initialized = false;
       $(function () {
          var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza'];
         $('#playagain').click(function() {
@@ -43,7 +44,10 @@
         }
 
         function play(){
-
+          if(!initialized){
+           speak("Let's play");
+           initialized = true;
+          }
           $("#playagain").hide();
           $("#game").show();
           $('#spanObject').html("");
