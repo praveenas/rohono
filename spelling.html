@@ -84,6 +84,10 @@
       color: #fff;
     }
 
+    #word {
+      float: left;
+    }
+
     /*
     * Header
     */
@@ -138,6 +142,7 @@
 </head>
 <script>
   var synth = window.speechSynthesis;
+  var score = 0;
   $(function () {
     $('#playagain').click(function () {
       play();
@@ -145,7 +150,13 @@
     $('#sd').click(function () {
       speak($("#word").html());
     });
-    play();
+    $('#first').click(function () {
+      speak("Let's play", function () {
+        $('#first').hide();
+        play();
+      });
+
+    });
 
     function speak(text, callback) {
       var utterThis = new SpeechSynthesisUtterance(text);
@@ -176,15 +187,18 @@
     function play() {
 
       synth.cancel();
+      $("#score").html(score);
       $("#playagain").hide();
+      $("#options").hide();
+      $("#game").show();
       $("#dropContainer").html("<div></div>");
       $("#dragContainer").html("<div></div>");
       $("#congratulations").html("");
 
       var words = ["the", "be", "to", "of", "and", "in", "that", "have", "it", "for", "not", "on", "with", "he", "as", "you", "do", "at", "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my", "one", "all", "would", "there", "their", "what", "so", "up", "out", "if", "about", "who", "get", "which", "go", "me", "when", "make", "can", "like", "time", "no", "just", "him", "know", "take", "people", "into", "year", "your", "good", "some", "could", "them", "see", "other", "than", "then", "now", "look", "only", "come", "its", "over", "think", "also", "back", "after", "use", "two", "how", "our", "work", "first", "well", "way", "even", "new", "want", "any", "these", "give", "day", "most", "us", "red", "yellow", "green", "blue", "white", "black"];
       var url = new URL(window.location);
-      var word = url.searchParams.get("word") ? url.searchParams.get("word") : words[Math.floor(Math.random() * Math.floor(words.length))];
-      var shuffleParam = url.searchParams.get("shuffle");
+      var word = $('#practiceCB').is(":checked") ? $('#practiceWord').val() : words[Math.floor(Math.random() * Math.floor(words.length))];
+      var shuffleParam = $('#shuffle').is(":checked");
 
       var indices = [];
       $("#word").html(word);
@@ -208,6 +222,8 @@
             $("#" + index).hide();
             if ($('.dragblock:visible').length == 0) {
               speak($("#word").html(), function () {
+                score++;
+                $("#score").html(score);
                 confetti.start(1000);
                 $("#playagain").show();
               });
@@ -225,7 +241,7 @@
 
       while (indices.length > 0) {
 
-        var index = shuffleParam === "true" ? Math.floor(Math.random() * Math.floor(indices.length)) : 0;
+        var index = shuffleParam ? Math.floor(Math.random() * Math.floor(indices.length)) : 0;
         var dragText = "<div id='" + indices[index] + "' class='drag dragblock text-center alert alert-light'>" + word[indices[index]] + "</div>"
         var dragRow = "<div id='dragRow' class='row'></div>";
         $("#dragContainer").append(dragRow);
@@ -241,6 +257,10 @@
       }
 
     }
+
+    $("#game").hide();
+    $("#first").show();
+
   })
 </script>
 <body class="text-center">
@@ -257,38 +277,65 @@
     </div>
   </header>
   <main role="main" class="inner cover">
-    <div id="sd" class="row">
-      <h1 class="cover-heading" id="word"></h1>
-      <svg class="bi bi-volume-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-           xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-              d="M6.717 3.55A.5.5 0 017 4v8a.5.5 0 01-.812.39L3.825 10.5H1.5A.5.5 0 011 10V6a.5.5 0 01.5-.5h2.325l2.363-1.89a.5.5 0 01.529-.06zM6 5.04L4.312 6.39A.5.5 0 014 6.5H2v3h2a.5.5 0 01.312.11L6 10.96V5.04z"
-              clip-rule="evenodd"></path>
-        <path
-            d="M11.536 14.01A8.473 8.473 0 0014.026 8a8.473 8.473 0 00-2.49-6.01l-.708.707A7.476 7.476 0 0113.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"></path>
-        <path
-            d="M10.121 12.596A6.48 6.48 0 0012.025 8a6.48 6.48 0 00-1.904-4.596l-.707.707A5.483 5.483 0 0111.025 8a5.483 5.483 0 01-1.61 3.89l.706.706z"></path>
-        <path
-            d="M8.707 11.182A4.486 4.486 0 0010.025 8a4.486 4.486 0 00-1.318-3.182L8 5.525A3.489 3.489 0 019.025 8 3.49 3.49 0 018 10.475l.707.707z"></path>
-      </svg>
-    </div>
-    <div class="row">
-      <div id="dropContainer" class="lead">
-      </div>
-      <div class="play">
-        <button id="playagain" type="button" class="btn btn-lg">
-          <svg class="bi bi-play-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor"
-               xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div class="row">
-      <p id="dragContainer" class="lead">
-      </p>
 
+    <div id="options">
+      <div class="form-check form-check-inline" id="shuffleCB">
+        <input class="form-check-input" type="checkbox" id="shuffle" value="true">
+        <label class="form-check-label" for="shuffle">Shuffle Letters?</label>
+      </div>
+      <div id="practice" class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input type="checkbox" id="practiceCB" aria-label="Practice your own word">
+          </div>
+        </div>
+        <input type="text" id="practiceWord" class="form-control" aria-label="Practice your own word"
+               placeholder="Practice your own word">
+      </div>
+      <button id="first" type="button" class="btn btn-lg">
+        <h1 class="cover-heading"> Play </h1>
+      </button>
+
+    </div>
+    <div id="game">
+      <div id="sd" class="row">
+
+
+        <div class="col" word>
+          <svg id="sd" class="bi bi-volume-up" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor"
+               xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+                  d="M6.717 3.55A.5.5 0 017 4v8a.5.5 0 01-.812.39L3.825 10.5H1.5A.5.5 0 011 10V6a.5.5 0 01.5-.5h2.325l2.363-1.89a.5.5 0 01.529-.06zM6 5.04L4.312 6.39A.5.5 0 014 6.5H2v3h2a.5.5 0 01.312.11L6 10.96V5.04z"
+                  clip-rule="evenodd"></path>
+            <path
+                d="M11.536 14.01A8.473 8.473 0 0014.026 8a8.473 8.473 0 00-2.49-6.01l-.708.707A7.476 7.476 0 0113.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"></path>
+            <path
+                d="M10.121 12.596A6.48 6.48 0 0012.025 8a6.48 6.48 0 00-1.904-4.596l-.707.707A5.483 5.483 0 0111.025 8a5.483 5.483 0 01-1.61 3.89l.706.706z"></path>
+            <path
+                d="M8.707 11.182A4.486 4.486 0 0010.025 8a4.486 4.486 0 00-1.318-3.182L8 5.525A3.489 3.489 0 019.025 8 3.49 3.49 0 018 10.475l.707.707z"></path>
+          </svg>
+          <h1 class="cover-heading" id="word"></h1>
+        </div>
+        <div class="col"><h2>Score: <span id="score"></span></h2></div>
+      </div>
+      <div class="row">
+        <div id="dropContainer" class="lead">
+        </div>
+        <div class="play">
+          <button id="playagain" type="button" class="btn btn-lg">
+            <svg class="bi bi-play-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path
+                  d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <p id="dragContainer" class="lead">
+        </p>
+
+      </div>
     </div>
 
   </main>

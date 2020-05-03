@@ -17,7 +17,9 @@
     var synth = window.speechSynthesis;
     var initialized = false;
     $(function () {
-      var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza', 'block'];
+      var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza', 'block', 'backpack',
+                     'banana', 'boat', 'crayon', 'icecream', 'pen', 'brush', 'flower', 'frenchfries'
+      ];
       $('#playagain').click(function () {
 
         play();
@@ -104,8 +106,8 @@
 
       }
 
-        $("#game").hide();
-        $("#first").show();
+      $("#game").hide();
+      $("#first").show();
 
     });
 
@@ -275,7 +277,6 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
     <div class="inner">
-      <!--<h3 class="masthead-brand">Rohono</h3>-->
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="#">Home</a>
         <a class="nav-link" href="./math.html">Math</a>

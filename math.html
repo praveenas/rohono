@@ -25,6 +25,10 @@
       color: #fff;
     }
 
+    .score {
+      margin-top: 10px;
+    }
+
     .cover-container {
       max-width: 42em;
     }
@@ -52,7 +56,6 @@
     #playagain:hover {
       animation: shake 0.5s;
       animation-iteration-count: 1;
-      background-color: #FFA37F;
     }
 
     .btn-lg {
@@ -162,15 +165,45 @@
       100% {
         transform: translate(1px, -2px) rotate(-1deg);
       }
-
+    }
   </style>
 </head>
 <script>
 
   $(function () {
-    var operators = ["+", "-", "x", "/"];
+    var operators = [];
+    var max = 100;
+    var score = 0;
 
     $('#playagain').click(function () {
+      play();
+    });
+
+    $('#first').click(function () {
+      $('#first').hide();
+      var singleDigits = $('#singleDigits').is(":checked");
+      var add = $('#add').is(":checked");
+      var multiply = $('#multiply').is(":checked");
+      var subtract = $('#subtract').is(":checked");
+      var divide = $('#divide').is(":checked");
+      if (add) {
+        operators.push("+");
+      }
+      if (subtract) {
+        operators.push("-");
+      }
+      if (multiply) {
+        operators.push("x");
+      }
+      if (divide) {
+        operators.push("/");
+      }
+      if (operators.length == 0) {
+        operators = ["+", "-", "x", "/"];
+      }
+      if (singleDigits) {
+        max = 9;
+      }
       play();
     });
 
@@ -191,36 +224,22 @@
       }
     }
 
-    function getOperator(param) {
-      switch (param) {
-        case "add" :
-          return "+";
-        case "subtract" :
-          return "-";
-        case "multiply" :
-          return "x";
-        case "divide" :
-          return "/";
-        default :
-          return operators[Math.floor(Math.random() * Math.floor(3))];
-      }
-    }
-
     function play() {
 
       $("#playagain").hide();
+      $("#options").hide();
       $("#congratulations").html("<div></div>");
       $("#equation").html("");
       $("#answer").html("");
+      $("#game").show();
       $(".calc").unbind('click');
+      $("#score").html(score);
 
-      var url = new URL(window.location);
+      var operator = operators[Math.floor(Math.random() * Math.floor(operators.length))]
 
-      var operator = getOperator(url.searchParams.get("operator"));
+      var x1 = Math.floor(Math.random() * Math.floor(max));
 
-      var x1 = Math.floor(Math.random() * Math.floor(100));
-
-      var x2Floor = operator === "-" || operator === "/" ? x1 : 100;
+      var x2Floor = operator === "-" || operator === "/" ? x1 : max;
       var x2 = Math.floor(Math.random() * Math.floor(x2Floor));
 
       if (operator === "/") {
@@ -234,13 +253,17 @@
       $(".calc").click(function () {
         answerSpan.innerHTML = answerSpan.innerHTML + this.id;
         if (answerSpan.innerHTML === answer(x1, x2, operator) + "") {
+          score++;
+          $("#score").html(score);
           confetti.start(1000);
           $('#playagain').show();
         }
       });
     }
 
-    play();
+    $("#game").hide();
+    $("#first").show();
+
   })
 
 </script>
@@ -259,37 +282,69 @@
     </div>
   </header>
   <main role="main" class="inner cover">
-    <div class="row">
-      <button id="playagain" type="button" class="btn btn-lg">
-        <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor"
-             xmlns="http://www.w3.org/2000/svg">
-          <path
-              d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
-        </svg>
+
+    <div id="options">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="add" value="true">
+        <label class="form-check-label" for="add">Add</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="subtract" value="true">
+        <label class="form-check-label" for="subtract">Subtract</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="multiply" value="true">
+        <label class="form-check-label" for="add">Multiply</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="divide" value="true">
+        <label class="form-check-label" for="add">Divide</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="singleDigits" value="true">
+        <label class="form-check-label" for="singleDigits">Single Digits</label>
+      </div>
+      <button id="first" type="button" class="btn btn-lg">
+        <h1 class="cover-heading"> Play </h1>
       </button>
-    </div>
-    <div class="row">
-      <h1 class="cover-heading" id="equation"></h1>
 
-      <h1 class="cover-heading"><span id="answer"></span></h1>
     </div>
+    <div id="game">
+      <div class="row">
+        <button id="playagain" type="button" class="btn btn-lg">
+          <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+          </svg>
+        </button>
+      </div>
 
-    <div class="row">
-      <button id="1" type="button" class="calc btn btn-md"><h1>1</h1></button>
-      <button id="2" type="button" class="calc btn btn-md"><h1>2</h1></button>
-      <button id="3" type="button" class="calc btn btn-md"><h1>3</h1></button>
-      <button id="4" type="button" class="calc btn btn-md"><h1>4</h1></button>
-      <button id="5" type="button" class="calc btn btn-md"><h1>5</h1></button>
-      <button id="6" type="button" class="calc btn btn-md"><h1>6</h1></button>
-      <button id="7" type="button" class="calc btn btn-md"><h1>7</h1></button>
-      <button id="8" type="button" class="calc btn btn-md"><h1>8</h1></button>
-      <button id="9" type="button" class="calc btn btn-md"><h1>9</h1></button>
-      <button id="0" type="button" class="calc btn btn-md"><h1>0</h1></button>
-    </div>
-    <div class="row">
-      <button id="clear" type="button" class="clear btn btn-lg">CLEAR</button>
-    </div>
+      <div class="row">
+        <h1 class="cover-heading" id="equation"></h1>
 
+        <h1 class="cover-heading"><span id="answer"></span></h1>
+      </div>
+
+      <div class="row">
+        <button id="1" type="button" class="calc btn btn-md"><h1>1</h1></button>
+        <button id="2" type="button" class="calc btn btn-md"><h1>2</h1></button>
+        <button id="3" type="button" class="calc btn btn-md"><h1>3</h1></button>
+        <button id="4" type="button" class="calc btn btn-md"><h1>4</h1></button>
+        <button id="5" type="button" class="calc btn btn-md"><h1>5</h1></button>
+        <button id="6" type="button" class="calc btn btn-md"><h1>6</h1></button>
+        <button id="7" type="button" class="calc btn btn-md"><h1>7</h1></button>
+        <button id="8" type="button" class="calc btn btn-md"><h1>8</h1></button>
+        <button id="9" type="button" class="calc btn btn-md"><h1>9</h1></button>
+        <button id="0" type="button" class="calc btn btn-md"><h1>0</h1></button>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button id="clear" type="button" class="clear btn btn-lg">CLEAR</button>
+        </div>
+        <div class="col score"><h2>Score: <span id="score"></span></h2></div>
+      </div>
+    </div>
   </main>
 </div>
 </body>
