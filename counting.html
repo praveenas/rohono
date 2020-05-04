@@ -12,172 +12,14 @@
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
-  <style>
-
-    .block, .hint {
-      width: 59.7917px;
-      margin: 2px;
-      border: 1px solid #001f3f;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    #options {
-      color: #fff;
-    }
-
-    .hint {
-      background-color: #FFA37F;
-      color: #CCF1FF;
-    }
-
-    .dragblock {
-      width: 59.7917px;
-      margin: 2px;
-      border: 1px dotted #001f3f;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    .counting {
-      background-color: #7FDBFF;
-      padding: 50px;
-    }
-
-    .cover-container {
-      max-width: 60em;
-    }
-
-    .cover-heading {
-      font-size: 5.00rem;
-    }
-
-    #playagain {
-      display: none;
-      background-color: #7F86FF;
-      color: #fff;
-      margin-left: 10px;
-    }
-
-    #playagain:hover {
-      animation: shake 0.5s;
-      animation-iteration-count: 1;
-      background-color: #FFA37F;
-    }
-
-    .btn-lg {
-      width: 100%;
-      background-color: #7F86FF;
-      color: #fff;
-    }
-
-    /*
-    * Header
-    */
-    .masthead {
-      margin-bottom: 2rem;
-    }
-
-    .masthead-brand {
-      margin-bottom: 0;
-    }
-
-    .nav-masthead .nav-link {
-      padding: .25rem 0;
-      font-weight: 700;
-      color: rgba(255, 255, 255, .5);
-      background-color: transparent;
-      border-bottom: .25rem solid transparent;
-    }
-
-    .nav-masthead .nav-link:hover,
-    .nav-masthead .nav-link:focus {
-      border-bottom-color: rgba(255, 255, 255, .25);
-    }
-
-    .nav-masthead .nav-link + .nav-link {
-      margin-left: 1rem;
-    }
-
-    .nav-masthead .active {
-      color: #fff;
-      border-bottom-color: #fff;
-    }
-
-    @media (min-width: 48em) {
-      .masthead-brand {
-        float: left;
-      }
-
-      .nav-masthead {
-        float: right;
-      }
-    }
-
-    /*
-    * Cover
-    */
-    .cover {
-      padding-top: 0rem;
-    }
-
-    @keyframes shake {
-      0% {
-        transform: translate(1px, 1px) rotate(0deg);
-      }
-      10% {
-        transform: translate(-1px, -2px) rotate(-1deg);
-      }
-      20% {
-        transform: translate(-3px, 0px) rotate(1deg);
-      }
-      30% {
-        transform: translate(3px, 2px) rotate(0deg);
-      }
-      40% {
-        transform: translate(1px, -1px) rotate(1deg);
-      }
-      50% {
-        transform: translate(-1px, 2px) rotate(-1deg);
-      }
-      60% {
-        transform: translate(-3px, 1px) rotate(0deg);
-      }
-      70% {
-        transform: translate(3px, 1px) rotate(-1deg);
-      }
-      80% {
-        transform: translate(-1px, -1px) rotate(1deg);
-      }
-      90% {
-        transform: translate(1px, 2px) rotate(0deg);
-      }
-      100% {
-        transform: translate(1px, -2px) rotate(-1deg);
-      }
-    }
-
-  </style>
+  <link rel="stylesheet" href="./css/rohono.css">
+  <script src="./scripts/common.js"></script>
 </head>
+
 <script>
   var synth = window.speechSynthesis;
   var countBys = [];
   $(function () {
-    function speak(text) {
-      var utterThis = new SpeechSynthesisUtterance(text);
-      if (synth.speaking) {
-        console.error('speechSynthesis.speaking');
-        return;
-      }
-      utterThis.onend = function (event) {
-        console.log('SpeechSynthesisUtterance.onend');
-      }
-      utterThis.onerror = function (event) {
-        console.error('SpeechSynthesisUtterance.onerror');
-      }
-      utterThis.rate = 0.8;
-      synth.speak(utterThis);
-    }
 
     $('#playagain').click(function () {
       play();
@@ -195,8 +37,6 @@
         countBys = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       }
       play();
-
-
     });
 
     function play() {
@@ -206,7 +46,6 @@
       $("#game").show();
       $("#dropContainer").html("<div></div>");
       $("#dragContainer").html("<div></div>");
-      $("#congratulations").html("");
 
       var shuffleParam = $('#shuffle').is(":checked");
 
@@ -228,7 +67,7 @@
         var text = i % countBy == 0 ? "?" : i;
         var clazz = i % countBy == 0 ? "alert-secondary" : "alert-light";
 
-        var dropText = "<div id='drop" + i + "' class='block text-center alert " + clazz + "'>" + text + "</div>"
+        var dropText = "<div id='drop" + i + "' class='small text-center alert " + clazz + "'>" + text + "</div>"
 
         $("#dropRow" + Math.ceil(i / countBy)).append(dropText);
 
@@ -245,7 +84,7 @@
               var index = event.target.id.replace("drop", "");
               $("#" + event.target.id).html(index).addClass("hint");
               $("#" + index).hide();
-              if ($('.dragblock:visible').length == 0) {
+              if ($('.drag:visible').length == 0) {
                 confetti.start(1000);
                 $("#playagain").show();
               }
@@ -260,7 +99,6 @@
           });
           dragArray.push(i);
         }
-
       }
 
       if (shuffleParam) {
@@ -269,7 +107,7 @@
 
       for (y = 0; y < dragArray.length; y++) {
         var rowId = Math.ceil(dragArray[y] / countBy);
-        var dragText = "<div id='" + dragArray[y] + "' class='drag dragblock text-center alert alert-light'>" + dragArray[y] + "</div>"
+        var dragText = "<div id='" + dragArray[y] + "' class='small drag text-center alert alert-light'>" + dragArray[y] + "</div>"
         var dragRow = "<div id='dragRow" + rowId + "' class='row'></div>";
         $("#dragContainer").append(dragRow);
         $("#dragRow" + rowId).append(dragText);
@@ -299,7 +137,6 @@
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
       }
-
       return array;
     }
 
@@ -311,7 +148,7 @@
     });
   })
 </script>
-<body style="background-color:#7FDBFF">
+<body>
 
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -401,11 +238,6 @@
         </div>
       </div>
 
-      <!--<div class="row">-->
-      <!--<button id="playagain" type="button" class="btn btn-lg">-->
-      <!--<div class="cover-heading"> Play Again</div>-->
-      <!--</button>-->
-      <!--</div>-->
       <div class="row">
         <div class="col-md-auto">
           <div id="dropContainer">
@@ -415,7 +247,7 @@
           <div id="dragContainer">
           </div>
           <div class="play">
-            <button id="playagain" type="button" class="btn btn-sm">
+            <button id="playagain" type="button" class="btn btn-lg">
               <svg class="bi bi-play-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor"
                    xmlns="http://www.w3.org/2000/svg">
                 <path

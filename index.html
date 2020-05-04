@@ -12,7 +12,8 @@
           integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
           crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
-
+  <script src="./scripts/common.js"></script>
+  <link rel="stylesheet" href="./css/rohono.css">
   <script>
     var synth = window.speechSynthesis;
     var initialized = false;
@@ -21,7 +22,6 @@
                      'banana', 'boat', 'crayon', 'icecream', 'pen', 'brush', 'flower', 'frenchfries'
       ];
       $('#playagain').click(function () {
-
         play();
       });
       $('#first').click(function () {
@@ -29,37 +29,10 @@
         $('#first').hide();
         play();
       });
-      function speak(text, callback) {
-        var utterThis = new SpeechSynthesisUtterance(text);
-        if (synth.speaking) {
-          console.error('speechSynthesis.speaking');
-          if (callback) {
-            callback();
-          }
-          return;
-        }
-        utterThis.onend = function (event) {
-          console.log('SpeechSynthesisUtterance.onend');
-          if (callback) {
-            callback();
-          }
-        }
-        utterThis.onerror = function (event) {
-          console.error('SpeechSynthesisUtterance.onerror');
-          if (callback) {
-            callback();
-          }
-        }
-        utterThis.rate = 1;
-        synth.speak(utterThis);
-      }
-
       function dismiss() {
         $("#playagain").show();
       }
-
       function play() {
-
         $("#playagain").hide();
         $("#game").show();
         $('#spanObject').html("");
@@ -103,7 +76,6 @@
         });
 
         $("#" + person).droppable('enable');
-
       }
 
       $("#game").hide();
@@ -112,168 +84,8 @@
     });
 
   </script>
-  <style>
-    .boy {
-      width: 300px;
-      height: 500px;
-    }
-
-    .girl {
-      width: 300px;
-      height: 500px;
-    }
-
-    .play {
-      display: block;
-      float: right;
-      margin-top: 100px;
-    }
-
-    .playagain:hover {
-      animation: shake 0.5s;
-      animation-iteration-count: 1;
-      background-color: #FFA37F;
-    }
-
-    .text, .content {
-      font-size: 50px;
-      font-weight: bolder;
-      left: 35%;
-      margin-left: 10px;
-    }
-
-    .content {
-      position: absolute;
-      bottom: 0;
-    }
-
-    .who {
-      width: 350px;
-      height: 400px;
-      margin-bottom: 10px;
-    }
-
-    .choices {
-      width: 350px;
-      display: block;
-    }
-
-    #playagain {
-      display: none;
-    }
-
-    .btn-lg {
-      width: 100%;
-      background-color: #7F86FF;
-      color: #fff;
-    }
-
-    .cover-container {
-      max-width: 50em;
-    }
-
-    .cover-heading {
-      font-size: 5.00rem;
-    }
-
-    .hint {
-      background-color: #FFA37F;
-      color: #CCF1FF;
-    }
-
-    .person {
-      width: 100%;
-    }
-
-    /*
-    * Header
-    */
-    .masthead {
-      margin-bottom: 2rem;
-    }
-
-    .masthead-brand {
-      margin-bottom: 0;
-    }
-
-    .nav-masthead .nav-link {
-      padding: .25rem 0;
-      font-weight: 700;
-      color: rgba(255, 255, 255, .5);
-      background-color: transparent;
-      border-bottom: .25rem solid transparent;
-    }
-
-    .nav-masthead .nav-link:hover,
-    .nav-masthead .nav-link:focus {
-      border-bottom-color: rgba(255, 255, 255, .25);
-    }
-
-    .nav-masthead .nav-link + .nav-link {
-      margin-left: 1rem;
-    }
-
-    .nav-masthead .active {
-      color: #fff;
-      border-bottom-color: #fff;
-    }
-
-    @media (min-width: 48em) {
-      .masthead-brand {
-        float: left;
-      }
-
-      .nav-masthead {
-        float: right;
-      }
-    }
-
-    /*
-    * Cover
-    */
-    .cover {
-      padding-top: 1.5rem;
-    }
-
-    @keyframes shake {
-      0% {
-        transform: translate(1px, 1px) rotate(0deg);
-      }
-      10% {
-        transform: translate(-1px, -2px) rotate(-1deg);
-      }
-      20% {
-        transform: translate(-3px, 0px) rotate(1deg);
-      }
-      30% {
-        transform: translate(3px, 2px) rotate(0deg);
-      }
-      40% {
-        transform: translate(1px, -1px) rotate(1deg);
-      }
-      50% {
-        transform: translate(-1px, 2px) rotate(-1deg);
-      }
-      60% {
-        transform: translate(-3px, 1px) rotate(0deg);
-      }
-      70% {
-        transform: translate(3px, 1px) rotate(-1deg);
-      }
-      80% {
-        transform: translate(-1px, -1px) rotate(1deg);
-      }
-      90% {
-        transform: translate(1px, 2px) rotate(0deg);
-      }
-      100% {
-        transform: translate(1px, -2px) rotate(-1deg);
-      }
-    }
-
-  </style>
 </head>
-<body style="background-color:#7FDBFF">
+<body>
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
   <header class="masthead mb-auto">
     <div class="inner">
@@ -286,7 +98,7 @@
     </div>
   </header>
   <main role="main" class="inner cover">
-    <div>
+    <div class="padding-top">
       <button id="first" type="button" class="btn btn-lg">
         <h1 class="cover-heading"> Play </h1>
       </button>

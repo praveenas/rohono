@@ -1,0 +1,231 @@
+html, body {
+  background-color: #7FDBFF;
+}
+
+body {
+  color: #fff;
+}
+
+/*
+* Header
+*/
+
+.cover-container {
+  max-width: 60em;
+}
+
+.cover-heading {
+  font-size: 5.00rem;
+}
+
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+
+  .nav-masthead {
+    float: right;
+  }
+}
+
+/*
+* Cover
+*/
+/*.cover {*/
+  /*padding-top: 0rem;*/
+/*}*/
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+.padding-top {
+  padding-top: 20px;
+}
+.btn-lg {
+  width: 100%;
+  background-color: #7F86FF;
+  color: #fff;
+}
+
+.btn-md {
+  margin: 5px;
+  padding: 15px;
+  background-color: #FFA37F;
+  border: 1px solid #001f3f;
+  border-radius: 10px;
+  color: #CCF1FF;
+}
+
+.play {
+  float: right;
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+#playagain {
+  display: none;
+}
+
+#playagain:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: 1;
+  background-color: #FFA37F;
+}
+
+.hint {
+  background-color: #FFA37F;
+  color: #CCF1FF;
+}
+
+.score {
+  margin-top: 10px;
+}
+
+/** counting**/
+.small {
+  width: 59.7917px;
+  margin: 2px;
+  border: 1px solid #001f3f;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.counting {
+  background-color: #7FDBFF;
+  padding: 50px;
+}
+
+
+/** tact **/
+.boy {
+  width: 300px;
+  height: 500px;
+}
+
+.girl {
+  width: 300px;
+  height: 500px;
+}
+
+.text, .content {
+  font-size: 50px;
+  font-weight: bolder;
+  left: 35%;
+  margin-left: 10px;
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+}
+
+.person {
+  width: 100%;
+}
+
+/** math **/
+#answer {
+  color: #7F86FF;
+  padding-left: 10px;
+}
+
+#clear {
+  background-color: #fff;
+  color: #001f3f;
+  border: 1px solid #001f3f;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+/** spelling **/
+.block {
+  width: 100px;
+  margin: 2px;
+  border: 1px solid #001f3f;
+  border-radius: 10px;
+  font-size: 5.00rem;
+}
+
+.hint {
+  background-color: #FFA37F;
+}
+
+.light {
+  color: #CCF1FF;
+  text-decoration-style: dashed;
+}
+
+.dragblock {
+  width: 100px;
+  margin: 2px;
+  border: 1px dotted #001f3f;
+  border-radius: 10px;
+  font-size: 5.00rem;
+}
+
+#word {
+  float: left;
+}
