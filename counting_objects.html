@@ -12,14 +12,19 @@
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+  <script src="./scripts/common.js"></script>
   <link rel="stylesheet" href="./css/rohono.css">
 </head>
 <script>
 
   $(function () {
     var operators = [];
-    var max = 100;
+    var max = 20;
     var score = 0;
+    var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza', 'block', 'backpack',
+                   'banana', 'boat', 'crayon', 'icecream', 'pen', 'brush', 'flower', 'frenchfries'
+    ];
+
 
     $('#playagain').click(function () {
       play();
@@ -27,28 +32,9 @@
 
     $('#first').click(function () {
       $('#first').hide();
-      var singleDigits = $('#singleDigits').is(":checked");
-      var add = $('#add').is(":checked");
-      var multiply = $('#multiply').is(":checked");
-      var subtract = $('#subtract').is(":checked");
-      var divide = $('#divide').is(":checked");
-      if (add) {
-        operators.push("+");
-      }
-      if (subtract) {
-        operators.push("-");
-      }
-      if (multiply) {
-        operators.push("x");
-      }
-      if (divide) {
-        operators.push("/");
-      }
-      if (operators.length == 0) {
-        operators = ["+", "-", "x", "/"];
-      }
-      if (singleDigits) {
-        max = 9;
+      var easy = $('#easy').is(":checked");
+      if(easy) {
+        max = 10;
       }
       play();
     });
@@ -57,47 +43,35 @@
       $("#answer").html("");
     });
 
-    function answer(x1, x2, operator) {
-      switch (operator) {
-        case "+" :
-          return x1 + x2;
-        case "-" :
-          return x1 - x2;
-        case "x" :
-          return x1 * x2;
-        case "/" :
-          return x1 / x2;
-      }
-    }
+    $('#sd').click(function () {
+      speak("Count!");
+    });
 
     function play() {
 
       $("#playagain").hide();
       $("#options").hide();
-      $("#equation").html("");
+      $("#objects").html("");
       $("#answer").html("");
       $("#game").show();
       $(".calc").unbind('click');
       $("#score").html(score);
 
-      var operator = operators[Math.floor(Math.random() * Math.floor(operators.length))]
+      var url = new URL(window.location);
+      var object = url.searchParams.get("object") || objects[Math.floor(Math.random() * objects.length)];
+      var count = Math.max(1, Math.floor(Math.random() * Math.floor(max)));
 
-      var x1 = Math.floor(Math.random() * Math.floor(max));
-
-      var x2Floor = operator === "-" || operator === "/" ? x1 : max;
-      var x2 = Math.floor(Math.random() * Math.floor(x2Floor));
-
-      if (operator === "/") {
-        x2 = Math.max(x2, 1);
-        x1 = Math.max(x2, (x1 - (x1 % x2) ));
+      var i;
+      for(i = 0; i < count; i++) {
+        var image = '<img id=object width="50px" height="50px"' + 'src="./images/objects/' + object + '.svg">';
+        $('#objects').append(image);
       }
 
-      $("#equation").html(x1 + " " + operator + " " + x2 + " = ");
       var answerSpan = document.getElementById('answer');
 
       $(".calc").click(function () {
         answerSpan.innerHTML = answerSpan.innerHTML + this.id;
-        if (answerSpan.innerHTML === answer(x1, x2, operator) + "") {
+        if (answerSpan.innerHTML === count + "") {
           score++;
           $("#score").html(score);
           confetti.start(1000);
@@ -112,6 +86,17 @@
   })
 
 </script>
+<style>
+    #object {
+      margin: 1px;
+    }
+    #objects {
+      width: 260px;
+      text-align: left;
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+</style>
 <body class="text-center">
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -120,9 +105,9 @@
       <!--<h3 class="masthead-brand">Rohono</h3>-->
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link" href="./">Home</a>
-        <a class="nav-link active" href="./math.html">Math Facts</a>
+        <a class="nav-link" href="./math.html">Math Facts</a>
         <a class="nav-link" href="./counting.html">Skip Counting</a>
-        <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
+        <a class="nav-link active" href="./counting_objects.html">Counting Objects</a>
         <a class="nav-link" href="./spelling.html">Spelling</a>
       </nav>
     </div>
@@ -131,24 +116,8 @@
 
     <div id="options">
       <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="add" value="true">
-        <label class="form-check-label" for="add">Add</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="subtract" value="true">
-        <label class="form-check-label" for="subtract">Subtract</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="multiply" value="true">
-        <label class="form-check-label" for="add">Multiply</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="divide" value="true">
-        <label class="form-check-label" for="add">Divide</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="singleDigits" value="true">
-        <label class="form-check-label" for="singleDigits">Single Digits</label>
+        <input class="form-check-input" type="checkbox" id="easy" value="true">
+        <label class="form-check-label" for="easy">Easy</label>
       </div>
       <button id="first" type="button" class="btn btn-lg">
         <h1 class="cover-heading"> Play </h1>
@@ -156,20 +125,33 @@
 
     </div>
     <div id="game">
+
       <div class="row">
-        <button id="playagain" type="button" class="btn btn-lg">
-          <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor"
-               xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
-          </svg>
-        </button>
+        <svg id="sd" class="bi bi-volume-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+           xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd"
+                d="M6.717 3.55A.5.5 0 017 4v8a.5.5 0 01-.812.39L3.825 10.5H1.5A.5.5 0 011 10V6a.5.5 0 01.5-.5h2.325l2.363-1.89a.5.5 0 01.529-.06zM6 5.04L4.312 6.39A.5.5 0 014 6.5H2v3h2a.5.5 0 01.312.11L6 10.96V5.04z"
+                clip-rule="evenodd"></path>
+          <path
+                  d="M11.536 14.01A8.473 8.473 0 0014.026 8a8.473 8.473 0 00-2.49-6.01l-.708.707A7.476 7.476 0 0113.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"></path>
+          <path
+                  d="M10.121 12.596A6.48 6.48 0 0012.025 8a6.48 6.48 0 00-1.904-4.596l-.707.707A5.483 5.483 0 0111.025 8a5.483 5.483 0 01-1.61 3.89l.706.706z"></path>
+          <path
+                  d="M8.707 11.182A4.486 4.486 0 0010.025 8a4.486 4.486 0 00-1.318-3.182L8 5.525A3.489 3.489 0 019.025 8 3.49 3.49 0 018 10.475l.707.707z"></path>
+        </svg>
+        <h1 class="cover-heading" id="equation">Count!</h1>
+        <h1 class="cover-heading"><span id="answer"></span></h1>
       </div>
 
-      <div class="row">
-        <h1 class="cover-heading" id="equation"></h1>
-
-        <h1 class="cover-heading"><span id="answer"></span></h1>
+      <div id="objects"></div>
+      <div class="play">
+        <button id="playagain" type="button" class="btn btn-lg">
+            <svg class="bi bi-play-fill" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor"
+                 xmlns="http://www.w3.org/2000/svg">
+                <path
+                        d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+            </svg>
+        </button>
       </div>
 
       <div class="row">

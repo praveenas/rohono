@@ -1,5 +1,8 @@
+var synth = window.speechSynthesis;
 function speak(text, callback) {
   var utterThis = new SpeechSynthesisUtterance(text);
+  utterThis.pitch = 1;
+  utterThis.rate = 0.8;
   if (synth.speaking) {
     console.error('speechSynthesis.speaking');
     if (callback) {
@@ -19,7 +22,6 @@ function speak(text, callback) {
       callback();
     }
   };
-  utterThis.rate = 0.8;
   synth.speak(utterThis);
 }
 
