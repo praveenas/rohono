@@ -93,11 +93,11 @@
       }
 
       $("#equation").html(x1 + " " + operator + " " + x2 + " = ");
-      var answerSpan = document.getElementById('answer');
+
 
       $(".calc").click(function () {
-        answerSpan.innerHTML = answerSpan.innerHTML + this.id;
-        if (answerSpan.innerHTML === answer(x1, x2, operator) + "") {
+        $("#answer").append(this.id);
+        if ($("#answer").html() === answer(x1, x2, operator) + "") {
           score++;
           $("#score").html(score);
           confetti.start(1000);

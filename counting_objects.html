@@ -25,7 +25,6 @@
                    'banana', 'boat', 'crayon', 'icecream', 'pen', 'brush', 'flower', 'frenchfries'
     ];
 
-
     $('#playagain').click(function () {
       play();
     });
@@ -70,8 +69,9 @@
       var answerSpan = document.getElementById('answer');
 
       $(".calc").click(function () {
-        answerSpan.innerHTML = answerSpan.innerHTML + this.id;
-        if (answerSpan.innerHTML === count + "") {
+        $("#answer").append(this.id);
+
+        if ($("#answer").html() === count + "") {
           score++;
           $("#score").html(score);
           confetti.start(1000);
