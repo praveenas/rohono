@@ -232,6 +232,9 @@ body {
 #word {
   float: left;
 }
+#line {
+  font-size: 2.00rem;
+}
 /** sorting **/
 .object {
   width: 50px;
