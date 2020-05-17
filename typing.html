@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+          integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+  <link rel="stylesheet" href="./css/rohono.css">
+</head>
+<script>
+
+  $(function () {
+     var score = 0;
+     var lines = [
+       "I always raise my hand.",
+       "Walk around the school.",
+       "I like school because it is fun.",
+       "It has been raining for two days.",
+       "Wash your hands before you eat.",
+       "That was the best time I ever had.",
+       "We both went for a walk.",
+       "Please call me on the phone.",
+       "It was cold last night.",
+       "She does a good job.",
+       "Don’t cut in line.",
+       "He is fast.",
+       "First grade is great!",
+       "A nickel is worth five cents.",
+       "I found my scissors in my desk.",
+       "My mom gave me a snack.",
+       "She goes to kindergarten.",
+       "The grass is green.",
+       "The skunk lifts its tail.",
+       "I made my bed.",
+       "How many pets do you have?",
+       "Turn off the light.",
+       "Do you like chocolate or vanilla?",
+       "The horse will pull the carriage.",
+       "Which book shall I read?",
+       "That is the right answer.",
+       "Let’s sing a song.",
+       "Please sit down.",
+       "The baby will sleep in the crib.",
+       "Did you tell your dad?",
+       "The family got in their car."
+     ]
+
+    $('#playagain').click(function () {
+      play();
+    });
+
+    $('#first').click(function () {
+      $('#first').hide();
+      play();
+    });
+
+    $(".clear").click(function () {
+      $("#answer").html("");
+    });
+
+
+    function play() {
+
+      $("#playagain").hide();
+      $("#options").hide();
+      $("#correct").html("");
+      $("#remaining").html("");
+      $("#answer").val('');
+      $("#game").show();
+      $("#answer").unbind('keydown');
+      $("#score").html(score);
+
+      var line = $('#practiceCB').is(":checked") ? $('#practiceLine').val() : lines[Math.floor(Math.random() * Math.floor(lines.length))];
+
+      $("#remaining").html(line);
+
+      $("#answer").keyup(function() {
+        var answerValue = $("#answer").val();
+        if( answerValue === line){
+          score++;
+          $("#score").html(score);
+          confetti.start(1000);
+          $('#playagain').show();
+        }
+        if(line.length > 0 && line.startsWith(answerValue)){
+            $("#correct").html(answerValue);
+            $("#remaining").html(line.substring(answerValue.length));
+        }
+
+      });
+    }
+
+    $("#game").hide();
+    $("#first").show();
+
+  })
+
+</script>
+<body class="text-center">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead">
+    <div class="inner">
+      <!--<h3 class="masthead-brand">Rohono</h3>-->
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link" href="./">Home</a>
+        <a class="nav-link" href="./math.html">Math Facts</a>
+        <a class="nav-link" href="./counting.html">Skip Counting</a>
+        <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
+        <a class="nav-link" href="./spelling.html">Spelling</a>
+        <a class="nav-link active" href="./typing.html">Typing</a>
+      </nav>
+    </div>
+  </header>
+  <main role="main" class="inner cover">
+
+    <div id="options">
+        <div id="practice" class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" id="practiceCB" aria-label="Practice your own line">
+                </div>
+            </div>
+            <input type="text" id="practiceLine" class="form-control" aria-label="Practice your own line"
+                   placeholder="Practice your own line">
+        </div>
+      <button id="first" type="button" class="btn btn-lg">
+        <h1 class="cover-heading"> Play </h1>
+      </button>
+
+    </div>
+    <div id="game">
+      <div class="row">
+        <button id="playagain" type="button" class="btn btn-lg">
+          <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor"
+               xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="row">
+        <h1 class="cover-heading" id="line"><span id="correct"></span><span id="remaining"></span></h1>
+
+        <h1 class="cover-heading"><textarea id="answer" cols="22" rows="2"></textarea></h1>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button id="clear" type="button" class="clear btn btn-lg">CLEAR</button>
+        </div>
+        <div class="col score"><h2>Score: <span id="score"></span></h2></div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
