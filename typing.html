@@ -74,7 +74,7 @@
       $("#remaining").html("");
       $("#answer").val('');
       $("#game").show();
-      $("#answer").unbind('keydown');
+      $("#answer").unbind('keyup');
       $("#score").html(score);
 
       var line = $('#practiceCB').is(":checked") ? $('#practiceLine').val() : lines[Math.floor(Math.random() * Math.floor(lines.length))];
@@ -86,7 +86,7 @@
         if( answerValue === line){
           score++;
           $("#score").html(score);
-          confetti.start(1000);
+          confetti.start(500);
           $('#playagain').show();
         }
         if(line.length > 0 && line.startsWith(answerValue)){
@@ -121,6 +121,7 @@
         <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
         <a class="nav-link" href="./spelling.html">Spelling</a>
         <a class="nav-link active" href="./typing.html">Typing</a>
+        <a class="nav-link" href="./wh.html">Wh ?'s</a>
       </nav>
     </div>
   </header>

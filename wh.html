@@ -16,10 +16,18 @@
   <link rel="stylesheet" href="./css/rohono.css">
   <script>
     var initialized = false;
+    var score = 0;
     $(function () {
-      var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza', 'block', 'backpack',
-                     'banana', 'boat', 'crayon', 'icecream', 'pen', 'brush', 'flower', 'frenchfries'
-      ];
+      $("#game").hide();
+      $("#first").hide();
+      var games;
+      $.getJSON( "json/wh.json", function( data ) {
+        console.log(data);
+        games = data;
+        $("#first").show();
+      });
+
+
       $('#playagain').click(function () {
         play();
       });
@@ -34,58 +42,71 @@
       function play() {
         $("#playagain").hide();
         $("#game").show();
-        $('#spanObject').html("");
+        $("#score").html(score);
 
-        var url = new URL(window.location);
-        var object = url.searchParams.get("object") || objects[Math.floor(Math.random() * objects.length)];
+        $('#objects').html("");
+        $('#question').html("");
+        $('#questionImage').html("");
+        $('#answerMissing').html("");
 
-        $(".objectText").text(object);
+        var game = games[Math.floor(Math.random() * games.length)];
+        //var game = games[11];
 
-        var image = '<img id=object width="50px" height="50px" style="z-index:1"' + 'src="./images/objects/' + object + '.svg">';
-        $('#spanObject').append(image);
+        $('#question').append(game.question);
+        if(game.image){
+          $('#questionImage').append('<img width="100px" height="100px" style="z-index:1" src="./images/wh/' + game.image + '">');
+        }
+        $('#answerMissing').append(game.answerMissing);
 
-        $('#object').draggable({
+        for(i = 0; i < game.options.length; i++) {
+          var image = '<img id="' + (game.options[i] === game.answerImage ? "answerImage" : game.options[i])  + '" class=object width="100px" height="100px"' + 'src="./images/wh/' + game.options[i] + '">';
+          $('#objects').append(image);
+        }
+
+
+        $('.object').draggable({
           cursor: "crosshair",
           revert: 'invalid'
         });
-        $('#boyimage').attr("src", "./images/boy.svg");
-        $('#girlimage').attr("src", "./images/girl.svg");
-
-
-        var persons = ['boy', 'girl'];
-        var personIndex = Math.floor(Math.random() * 2);
-        var person = persons[personIndex];
-        $(".personText").text(person);
-
-        $(".btn-" + person).click(function () {
-          dismiss();
-        });
 
         $('#sd').click(function () {
-          speak("Give the " + $(".objectText").text() + " to the " + $(".personText").text());
+          speak($('#question').html());
         });
 
-        $("#" + person).droppable({
+        $("#answer").droppable({
           //activeClass: "hint",
+          accept: '#answerImage',
           drop: function (event, ui) {
-            confetti.start(500);
-            $("#" + person).droppable('disable');
-            speak("The " + person + " has the " + $(".objectText").text(), dismiss);
+            score++;
+            $("#score").html(score);
+            confetti.start(100);
+            speak(game.answer, dismiss);
           }
         });
 
-        $("#" + person).droppable('enable');
-      }
+    }
 
-      $("#game").hide();
-      $("#first").show();
-
-    });
+  });
 
   </script>
   <style>
       .cover-container {
-      max-width: 60em;
+        max-width: 60em;
+      }
+      .object {
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+      }
+      #answer {
+        width: 100px;
+        height: 100px;
+        border: 5px #7F86FF dashed;
+        position: relative;
+        margin-left: 15px;
+      }
+      .play {
+        margin-top: 0px;
       }
   </style>
 </head>
@@ -94,13 +115,13 @@
   <header class="masthead mb-auto">
     <div class="inner">
       <nav class="nav nav-masthead justify-content-center">
-        <a class="nav-link active" href="#">Home</a>
-        <a class="nav-link" href="./math.html">Math Facts</a>
-        <a class="nav-link" href="./counting.html">Skip Counting</a>
-        <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
-        <a class="nav-link" href="./spelling.html">Spelling</a>
-        <a class="nav-link" href="./typing.html">Typing</a>
-        <a class="nav-link" href="./wh.html">Wh ?'s</a>
+          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" href="./math.html">Math Facts</a>
+          <a class="nav-link" href="./counting.html">Skip Counting</a>
+          <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
+          <a class="nav-link" href="./spelling.html">Spelling</a>
+          <a class="nav-link" href="./typing.html">Typing</a>
+          <a class="nav-link active" href="./wh.html">Wh ?'s</a>
       </nav>
     </div>
   </header>
@@ -125,28 +146,32 @@
             <path
                 d="M8.707 11.182A4.486 4.486 0 0010.025 8a4.486 4.486 0 00-1.318-3.182L8 5.525A3.489 3.489 0 019.025 8 3.49 3.49 0 018 10.475l.707.707z"></path>
           </svg>
-          Give the <span class="objectText"></span> to the <span class="red personText"></span>
-          <span id="spanObject"></span>
+          <span id="question"></span>
         </h1>
+
       </div>
-      <div class="row person">
-        <div id="boy" class="boy">
-          <img id="boyimage">
-        </div>
-        <div id="girl" class="girl">
-          <img id="girlimage">
-        </div>
-        <div class="play">
-          <button id="playagain" type="button" class="btn btn-lg">
-            <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor"
-                 xmlns="http://www.w3.org/2000/svg">
-              <path
-                  d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
-            </svg>
-          </button>
-        </div>
+      <div class="row">
+        <span id="questionImage"></span>
       </div>
-    </div>
+      <div class="row">
+        <h1><span id="answerMissing"></span></h1> <span id="answer"></span>
+          <div class="play">
+              <button id="playagain" type="button" class="btn btn-md">
+                  <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor"
+                       xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
+                  </svg>
+              </button>
+          </div>
+
+      </div>
+      <div class="row">
+        <div id="objects"></div>
+      </div>
+      <div class="row">
+          <div class="col score"><h2>Score: <span id="score"></span></h2></div>
+      </div>
+      </div>
   </main>
 </div>
 </body>

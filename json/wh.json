@@ -1,0 +1,99 @@
+[
+  {
+    "question": "Where does a doctor work?",
+    "answerMissing": "A doctor works at a ",
+    "answer": "A doctor works at a hospital.",
+    "image": "doctor.svg",
+    "answerImage": "hospital.svg",
+    "options": ["hospital.svg", "policestation.svg", "school.svg"]
+  },
+  {
+    "question": "Where does a police man work?",
+    "answerMissing": "A police man works at a ",
+    "answer": "A police man works at a police station.",
+    "image": "policeman.svg",
+    "answerImage": "policestation.svg",
+    "options": ["hospital.svg", "policestation.svg", "school.svg"]
+  },
+  {
+    "question": "Where does a teacher work?",
+    "answerMissing": "A teacher works at a ",
+    "answer": "A teacher works at a school.",
+    "image": "teacher.svg",
+    "answerImage": "school.svg",
+    "options": ["hospital.svg", "policestation.svg", "school.svg"]
+  },
+  {
+    "question": "How does the boy feel ?",
+    "answerMissing": "The boy is  ",
+    "answer": "The boy is happy.",
+    "image": "boyhappy.svg",
+    "answerImage": "happy.svg",
+    "options": ["happy.svg", "angry.svg", "sad.svg"]
+  },
+  {
+    "question": "How does the girl feel?",
+    "answerMissing": "The girl is ",
+    "answer": "The girl is angry.",
+    "image": "girlangry.svg",
+    "answerImage": "angry.svg",
+    "options": ["happy.svg", "angry.svg", "sad.svg"]
+  },
+  {
+    "question": "How does the girl feel?",
+    "answerMissing": "The girl is  ",
+    "answer": "The girl is sad.",
+    "image": "girlsad.svg",
+    "answerImage": "sad.svg",
+    "options": ["happy.svg", "angry.svg", "sad.svg"]
+  },
+  {
+    "question": "How does the boy feel ?",
+    "answerMissing": "The boy is  ",
+    "answer": "The boy is hungry.",
+    "image": "boyhungry.svg",
+    "answerImage": "hungry.svg",
+    "options": ["hungry.svg", "scared.svg", "surprised.svg"]
+  },
+  {
+    "question": "How does the girl feel?",
+    "answerMissing": "The girl is ",
+    "answer": "The girl is surprised.",
+    "image": "girlsurprised.svg",
+    "answerImage": "surprised.svg",
+    "options": ["hungry.svg", "scared.svg", "surprised.svg"]
+  },
+  {
+    "question": "How does the boy feel?",
+    "answerMissing": "The boy is  ",
+    "answer": "The boy is scared.",
+    "image": "boyscared.svg",
+    "answerImage": "scared.svg",
+    "options": ["hungry.svg", "scared.svg", "surprised.svg"]
+  },
+  {
+    "question": "When do we sleep?",
+    "answerMissing": "We sleep at  ",
+    "answer": "We sleep at night.",
+    "image": "bed.svg",
+    "answerImage": "night.svg",
+    "options": ["night.svg", "morning.svg"]
+  },
+  {
+    "question": "When do we eat breakfast?",
+    "answerMissing": "We eat breakfast in the  ",
+    "answer": "We eat breakfast in the morning.",
+    "image": "breakfast.svg",
+    "answerImage": "morning.svg",
+    "options": ["night.svg", "morning.svg"]
+  },
+  {
+    "question": "Who puts out fires?",
+    "answerMissing": "Fires are put out by ",
+    "answer": "The fireman puts out fires.",
+    "image": "fire.svg",
+    "answerImage": "firefighter.svg",
+    "options": ["policeman.svg", "firefighter.svg", "doctor.svg"]
+  }
+
+]
