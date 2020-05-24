@@ -88,12 +88,270 @@
     "options": ["night.svg", "morning.svg"]
   },
   {
+    "question": "When do we use an umbrella?",
+    "answerMissing": "We use an umbrella when it  ",
+    "answer": "We use an umbrella when it rains.",
+    "image": "umbrella.svg",
+    "answerImage": "rain.svg",
+    "options": ["rain.svg", "summer.svg", "winter.svg"]
+  },
+  {
+    "question": "When do we wear sunglasses?",
+    "answerMissing": "We wear sunglasses when it's   ",
+    "answer": "We wear sunglasses when it's sunny.",
+    "image": "sunglasses.svg",
+    "answerImage": "summer.svg",
+    "options": ["rain.svg", "summer.svg", "winter.svg"]
+  },
+  {
+    "question": "When do we wear a coat?",
+    "answerMissing": "We wear a coat when it's   ",
+    "answer": "We wear a coat when it's cold outside.",
+    "image": "coat.svg",
+    "answerImage": "winter.svg",
+    "options": ["rain.svg", "summer.svg", "winter.svg"]
+  },
+  {
     "question": "Who puts out fires?",
-    "answerMissing": "Fires are put out by ",
+    "answerMissing": "",
     "answer": "The fireman puts out fires.",
     "image": "fire.svg",
     "answerImage": "firefighter.svg",
     "options": ["policeman.svg", "firefighter.svg", "doctor.svg"]
+  },
+  {
+    "question": "Who do you see when you are sick?",
+    "answerMissing": "",
+    "answer": "I see the doctor when I'm sick.",
+    "image": "sick.svg",
+    "answerImage": "doctor.svg",
+    "options": ["policeman.svg", "firefighter.svg", "doctor.svg"]
+  },
+  {
+    "question": "Who delivers mail?",
+    "answerMissing": "",
+    "answer": "The mailman delivers mail.",
+    "image": "mail.svg",
+    "answerImage": "mailman.svg",
+    "options": ["mailman.svg", "dentist.svg", "policeman.svg"]
+  },
+  {
+    "question": "Who checks your teeth?",
+    "answerMissing": "",
+    "answer": "The dentist checks my teeth.",
+    "image": "dentistchair.svg",
+    "answerImage": "dentist.svg",
+    "options": ["mailman.svg", "dentist.svg", "toothbrush.svg"]
+  },
+  {
+    "question": "Who flies an airplane?",
+    "answerMissing": "",
+    "answer": "The pilot flies an airplane.",
+    "image": "airplane.svg",
+    "answerImage": "pilot.svg",
+    "options": ["mailman.svg", "pilot.svg", "barber.svg"]
+  },
+  {
+    "question": "Who cuts your hair?",
+    "answerMissing": "",
+    "answer": "The barber cuts my hair.",
+    "image": "haircut.svg",
+    "answerImage": "barber.svg",
+    "options": ["mailman.svg", "pilot.svg", "barber.svg"]
+  },
+  {
+    "question": "Where do you sleep?",
+    "answerMissing": "I sleep on the ",
+    "answer": "I sleep on the bed.",
+    "image": "sleepy.svg",
+    "answerImage": "bed.svg",
+    "options": ["night.svg", "bed.svg", "dentistchair.svg"]
+  },
+  {
+    "question": "Where do fish live?",
+    "answerMissing": "Fish live in ",
+    "answer": "Fish live in water.",
+    "image": "fish.svg",
+    "answerImage": "sea.svg",
+    "options": ["sea.svg", "land.svg"]
+  },
+  {
+    "question": "Where do we bake cookies?",
+    "answerMissing": "We bake cookies in the ",
+    "answer": "We bake cookies in the kitchen.",
+    "image": "cookie.svg",
+    "answerImage": "kitchen.svg",
+    "options": ["kitchen.svg", "bathroom.svg", "outside.svg"]
+  },
+  {
+    "question": "Where do we brush our teeth?",
+    "answerMissing": "We brush our teeth in the ",
+    "answer": "We brush our teeth in the bathroom.",
+    "image": "toothbrush.svg",
+    "answerImage": "bathroom.svg",
+    "options": ["kitchen.svg", "bathroom.svg", "outside.svg"]
+  },
+  {
+    "question": "Where do we play?",
+    "answerMissing": "We play ",
+    "answer": "We play outside.",
+    "image": "play.svg",
+    "answerImage": "outside.svg",
+    "options": ["kitchen.svg", "bathroom.svg", "outside.svg"]
+  },
+  {
+    "question": "Where do snakes live?",
+    "answerMissing": "Snakes live in the ",
+    "answer": "Snakes live in the desert.",
+    "image": "snake.svg",
+    "answerImage": "land.svg",
+    "options": ["sea.svg", "land.svg"]
+  },
+  {
+    "question": "Where do we take a shower?",
+    "answerMissing": "We take a shower in the ",
+    "answer": "We take a shower in the bathroom.",
+    "image": "bath.svg",
+    "answerImage": "bathtub.svg",
+    "options": ["kitchen.svg", "bathtub.svg", "outside.svg"]
+  },
+  {
+    "question": "Where do we go shopping?",
+    "answerMissing": "We shop at the ",
+    "answer": "We shop at the grocery store.",
+    "image": "shoppingcart.svg",
+    "answerImage": "grocerystore.svg",
+    "options": ["grocerystore.svg", "hospital.svg", "school.svg"]
+  },
+  {
+    "question": "Where do we go when we are sick?",
+    "answerMissing": "",
+    "answer": "We go to the hospital when we are sick.",
+    "image": "sick.svg",
+    "answerImage": "hospital.svg",
+    "options": ["grocerystore.svg", "hospital.svg", "school.svg"]
+  },
+  {
+    "question": "Where do we buy groceries?",
+    "answerMissing": "We buy groceries at the ",
+    "answer": "We buy groceries at the grocery store.",
+    "image": "groceries.svg",
+    "answerImage": "grocerystore.svg",
+    "options": ["grocerystore.svg", "hospital.svg", "school.svg"]
+  },
+  {
+    "question": "Which one flies in the sky?",
+    "answerMissing": "",
+    "answer": "A butterfly flies in the sky.",
+    "image": "",
+    "answerImage": "butterfly.svg",
+    "options": ["worm.svg", "butterfly.svg", "starfish.svg"]
+  },
+  {
+    "question": "Which one lives in the dirt?",
+    "answerMissing": "",
+    "answer": "A worm lives in the dirt.",
+    "image": "",
+    "answerImage": "worm.svg",
+    "options": ["worm.svg", "butterfly.svg", "starfish.svg"]
+  },
+  {
+    "question": "Which one lives in the water?",
+    "answerMissing": "",
+    "answer": "A starfish lives in the water.",
+    "image": "",
+    "answerImage": "starfish.svg",
+    "options": ["worm.svg", "butterfly.svg", "starfish.svg"]
+  },
+  {
+    "question": "Which one has a hard shell?",
+    "answerMissing": "",
+    "answer": "A turtle has a hard shell.",
+    "image": "",
+    "answerImage": "turtle.svg",
+    "options": ["bee.svg", "turtle.svg", "penguin.svg"]
+  },
+  {
+    "question": "Which one lives in the cold?",
+    "answerMissing": "",
+    "answer": "A penguin lives in the cold.",
+    "image": "",
+    "answerImage": "penguin.svg",
+    "options": ["bee.svg", "turtle.svg", "penguin.svg"]
+  },
+  {
+    "question": "Which one makes honey?",
+    "answerMissing": "",
+    "answer": "A bee makes honey.",
+    "image": "honey.svg",
+    "answerImage": "bee.svg",
+    "options": ["bee.svg", "turtle.svg", "penguin.svg"]
+  },
+  {
+    "question": "Which one is brown?",
+    "answerMissing": "",
+    "answer": "The cookie is brown.",
+    "image": "",
+    "answerImage": "cookie.svg",
+    "options": ["cookie.svg", "policeman.svg", "orange.svg"]
+  },
+  {
+    "question": "Which one is orange?",
+    "answerMissing": "",
+    "answer": "The fish is orange.",
+    "image": "",
+    "answerImage": "fish.svg",
+    "options": ["cookie.svg", "bee.svg", "fish.svg"]
+  },
+  {
+    "question": "Where does a farmer live?",
+    "answerMissing": "A farmer lives in the ",
+    "answer": "A farmer lives in the barn.",
+    "image": "farmer.svg",
+    "answerImage": "barn.svg",
+    "options": ["barn.svg", "hospital.svg", "school.svg"]
+  },
+  {
+    "question": "Which one is crunchy?",
+    "answerMissing": "",
+    "answer": "Chips are crunchy.",
+    "image": "",
+    "answerImage": "chips.svg",
+    "options": ["juice.svg", "chips.svg", "orange.svg"]
+  },
+  {
+    "question": "Which one is a fruit?",
+    "answerMissing": "",
+    "answer": "An orange is a fruit.",
+    "image": "",
+    "answerImage": "orange.svg",
+    "options": ["cookie.svg", "chips.svg", "orange.svg"]
+  },
+  {
+    "question": "Which one do you drink?",
+    "answerMissing": "",
+    "answer": "We drink juice.",
+    "image": "",
+    "answerImage": "juice.svg",
+    "options": ["juice.svg", "chips.svg", "orange.svg"]
+  },
+  {
+    "question": "Which one do you bake?",
+    "answerMissing": "",
+    "answer": "We bake cookies.",
+    "image": "",
+    "answerImage": "cookie.svg",
+    "options": ["cookie.svg", "juice.svg", "orange.svg"]
+  },
+  {
+    "question": "Which one do we wear?",
+    "answerMissing": "We wear a ",
+    "answer": "We wear a coat.",
+    "image": "",
+    "answerImage": "coat.svg",
+    "options": ["coat.svg", "bee.svg", "winter.svg"]
   }
+
+
 
 ]

@@ -49,8 +49,8 @@
         $('#questionImage').html("");
         $('#answerMissing').html("");
 
-        var game = games[Math.floor(Math.random() * games.length)];
-        //var game = games[11];
+        //var game = games[Math.floor(Math.random() * games.length)];
+        var game = games[score%games.length];
 
         $('#question').append(game.question);
         if(game.image){
@@ -154,7 +154,12 @@
         <span id="questionImage"></span>
       </div>
       <div class="row">
-        <h1><span id="answerMissing"></span></h1> <span id="answer"></span>
+
+        <h1>
+            <span id="answerMissing"></span>
+        </h1>
+        <span id="answer"></span>
+
           <div class="play">
               <button id="playagain" type="button" class="btn btn-md">
                   <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor"
