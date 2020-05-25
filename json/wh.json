@@ -112,16 +112,8 @@
     "options": ["rain.svg", "summer.svg", "winter.svg"]
   },
   {
-    "question": "Who puts out fires?",
-    "answerMissing": "",
-    "answer": "The fireman puts out fires.",
-    "image": "fire.svg",
-    "answerImage": "firefighter.svg",
-    "options": ["policeman.svg", "firefighter.svg", "doctor.svg"]
-  },
-  {
     "question": "Who do you see when you are sick?",
-    "answerMissing": "",
+    "answerMissing": "I see the <> when I'm sick.",
     "answer": "I see the doctor when I'm sick.",
     "image": "sick.svg",
     "answerImage": "doctor.svg",
@@ -129,7 +121,7 @@
   },
   {
     "question": "Who delivers mail?",
-    "answerMissing": "",
+    "answerMissing": "The <> delivers mail.",
     "answer": "The mailman delivers mail.",
     "image": "mail.svg",
     "answerImage": "mailman.svg",
@@ -137,7 +129,7 @@
   },
   {
     "question": "Who checks your teeth?",
-    "answerMissing": "",
+    "answerMissing": "The <> checks my teeth.",
     "answer": "The dentist checks my teeth.",
     "image": "dentistchair.svg",
     "answerImage": "dentist.svg",
@@ -145,7 +137,7 @@
   },
   {
     "question": "Who flies an airplane?",
-    "answerMissing": "",
+    "answerMissing": "The <> flies an airplane.",
     "answer": "The pilot flies an airplane.",
     "image": "airplane.svg",
     "answerImage": "pilot.svg",
@@ -153,7 +145,7 @@
   },
   {
     "question": "Who cuts your hair?",
-    "answerMissing": "",
+    "answerMissing": "The <> cuts my hair.",
     "answer": "The barber cuts my hair.",
     "image": "haircut.svg",
     "answerImage": "barber.svg",
@@ -225,11 +217,11 @@
   },
   {
     "question": "Where do we go when we are sick?",
-    "answerMissing": "",
+    "answerMissing": "We go to the <> when we are sick.",
     "answer": "We go to the hospital when we are sick.",
     "image": "sick.svg",
     "answerImage": "hospital.svg",
-    "options": ["grocerystore.svg", "hospital.svg", "school.svg"]
+    "options": ["grocerystore.svg", "hospital.svg", "doctor.svg"]
   },
   {
     "question": "Where do we buy groceries?",
@@ -241,7 +233,7 @@
   },
   {
     "question": "Which one flies in the sky?",
-    "answerMissing": "",
+    "answerMissing": "A <> flies in the sky.",
     "answer": "A butterfly flies in the sky.",
     "image": "",
     "answerImage": "butterfly.svg",
@@ -249,7 +241,7 @@
   },
   {
     "question": "Which one lives in the dirt?",
-    "answerMissing": "",
+    "answerMissing": "A <> lives in the dirt.",
     "answer": "A worm lives in the dirt.",
     "image": "",
     "answerImage": "worm.svg",
@@ -257,7 +249,7 @@
   },
   {
     "question": "Which one lives in the water?",
-    "answerMissing": "",
+    "answerMissing": "A <> lives in the water.",
     "answer": "A starfish lives in the water.",
     "image": "",
     "answerImage": "starfish.svg",
@@ -265,7 +257,7 @@
   },
   {
     "question": "Which one has a hard shell?",
-    "answerMissing": "",
+    "answerMissing": "A <> has a hard shell.",
     "answer": "A turtle has a hard shell.",
     "image": "",
     "answerImage": "turtle.svg",
@@ -273,7 +265,7 @@
   },
   {
     "question": "Which one lives in the cold?",
-    "answerMissing": "",
+    "answerMissing": "A <> lives in the cold.",
     "answer": "A penguin lives in the cold.",
     "image": "",
     "answerImage": "penguin.svg",
@@ -281,7 +273,7 @@
   },
   {
     "question": "Which one makes honey?",
-    "answerMissing": "",
+    "answerMissing": "A <> makes honey.",
     "answer": "A bee makes honey.",
     "image": "honey.svg",
     "answerImage": "bee.svg",
@@ -289,7 +281,7 @@
   },
   {
     "question": "Which one is brown?",
-    "answerMissing": "",
+    "answerMissing": "The <> is brown.",
     "answer": "The cookie is brown.",
     "image": "",
     "answerImage": "cookie.svg",
@@ -297,7 +289,7 @@
   },
   {
     "question": "Which one is orange?",
-    "answerMissing": "",
+    "answerMissing": "The <> is orange.",
     "answer": "The fish is orange.",
     "image": "",
     "answerImage": "fish.svg",
@@ -313,7 +305,7 @@
   },
   {
     "question": "Which one is crunchy?",
-    "answerMissing": "",
+    "answerMissing": "<> are crunchy.",
     "answer": "Chips are crunchy.",
     "image": "",
     "answerImage": "chips.svg",
@@ -321,7 +313,7 @@
   },
   {
     "question": "Which one is a fruit?",
-    "answerMissing": "",
+    "answerMissing": "An <> is a fruit.",
     "answer": "An orange is a fruit.",
     "image": "",
     "answerImage": "orange.svg",
@@ -329,7 +321,7 @@
   },
   {
     "question": "Which one do you drink?",
-    "answerMissing": "",
+    "answerMissing": "We drink ",
     "answer": "We drink juice.",
     "image": "",
     "answerImage": "juice.svg",
@@ -337,7 +329,7 @@
   },
   {
     "question": "Which one do you bake?",
-    "answerMissing": "",
+    "answerMissing": "We bake ",
     "answer": "We bake cookies.",
     "image": "",
     "answerImage": "cookie.svg",
@@ -350,7 +342,24 @@
     "image": "",
     "answerImage": "coat.svg",
     "options": ["coat.svg", "bee.svg", "winter.svg"]
+  },
+  {
+    "question": "Where is the cat?",
+    "answerMissing": "The cat is <> on the fence.",
+    "answer": "The cat is on the fence.",
+    "image": "catfence.svg",
+    "answerImage": "on.svg",
+    "options": ["on.svg", "under.svg", "behind.svg"]
+  },
+  {
+    "question": "Who puts out fires?",
+    "answerMissing": "The <> puts out fires.",
+    "answer": "The fireman puts out fires.",
+    "image": "fire.svg",
+    "answerImage": "firefighter.svg",
+    "options": ["policeman.svg", "firefighter.svg", "doctor.svg"]
   }
+
 
 
 
