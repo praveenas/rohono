@@ -344,14 +344,6 @@
     "options": ["coat.svg", "bee.svg", "winter.svg"]
   },
   {
-    "question": "Where is the cat?",
-    "answerMissing": "The cat is <> on the fence.",
-    "answer": "The cat is on the fence.",
-    "image": "catfence.svg",
-    "answerImage": "on.svg",
-    "options": ["on.svg", "under.svg", "behind.svg"]
-  },
-  {
     "question": "Who puts out fires?",
     "answerMissing": "The <> puts out fires.",
     "answer": "The fireman puts out fires.",
@@ -359,8 +351,4 @@
     "answerImage": "firefighter.svg",
     "options": ["policeman.svg", "firefighter.svg", "doctor.svg"]
   }
-
-
-
-
 ]

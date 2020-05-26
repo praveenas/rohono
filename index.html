@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="./css/rohono.css">
     <script>
     var initialized = false;
+    var score = 0;
     $(function () {
       var games;
       $.getJSON( "json/prep.json", function( data ) {
@@ -35,6 +36,7 @@
         $("#playagain").show();
       }
       function play() {
+        $("#score").html(score);
         $("#playagain").hide();
         $("#game").show();
         $('#demand').html("");
@@ -74,6 +76,7 @@
           //activeClass: "hint",
           drop: function (event, ui) {
             confetti.start(500);
+            score++;
             $("#" + destination).droppable('disable');
             //speak("The "+object+ "is "+preposition );
             $("#playagain").show();
@@ -84,7 +87,7 @@
       }
 
       $("#game").hide();
-      //$("#first").show();
+
 
     });
 
@@ -137,7 +140,7 @@
     <header class="masthead mb-auto">
         <div class="inner">
             <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link active" href="#">Prepositions</a>
                 <a class="nav-link" href="./math.html">Math Facts</a>
                 <a class="nav-link" href="./counting.html">Skip Counting</a>
                 <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
@@ -153,6 +156,7 @@
                 <h1 class="cover-heading"> Play </h1>
             </button>
         </div>
+
         <div id="game">
             <div class="row">
                 <h1>
@@ -163,15 +167,16 @@
             </div>
             <div id="destinations" class="row">
             </div>
-            <div class="play row">
+            <div class="row">
+                <span class="col score"><h2>Score: <span id="score"></span></h2></span>
                 <button id="playagain" type="button" class="btn btn-lg">
                     <svg class="bi bi-play-fill" width="5em" height="5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 010 1.393z"/>
                     </svg>
                 </button>
             </div>
-
         </div>
+
     </main>
 </div>
 </body>
