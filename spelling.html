@@ -72,7 +72,7 @@
               speak($("#word").html(), function () {
                 score++;
                 $("#score").html(score);
-                confetti.start(500);
+                if(score%20==0) {confetti.start(500);}
                 $("#playagain").show();
               });
             }

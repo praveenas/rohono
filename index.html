@@ -40,6 +40,8 @@
         $("#playagain").hide();
         $("#game").show();
         $('#demand').html("");
+        $('#answerRow').hide();
+        $('#answer').html("");
         $('#destinations').html("");
         $('#spanObject').html("");
 
@@ -50,6 +52,11 @@
         var destination =  game.destinations[Math.floor(Math.random() * game.destinations.length)];
 
         $("#demand").text(game.demand
+        .replace("<object>",object)
+        .replace("<preposition>",preposition)
+        .replace("<destination>", destination));
+
+         $("#answer").text(game.answer
         .replace("<object>",object)
         .replace("<preposition>",preposition)
         .replace("<destination>", destination));
@@ -71,14 +78,18 @@
         $('#sd').click(function () {
           speak($("#demand").text());
         });
+         $('#sdAnswer').click(function () {
+          speak($("#answer").text());
+        });
 
         $("#" + destination).droppable({
           //activeClass: "hint",
           drop: function (event, ui) {
-            confetti.start(500);
+            if(score%20==0) {confetti.start(500);}
             score++;
             $("#" + destination).droppable('disable');
-            //speak("The "+object+ "is "+preposition );
+            $("#answerRow").show();
+            speak($("#answer").text());
             $("#playagain").show();
           }
         });
@@ -87,6 +98,7 @@
       }
 
       $("#game").hide();
+      $("#answerRow").hide();
 
 
     });
@@ -166,6 +178,12 @@
                 </h1>
             </div>
             <div id="destinations" class="row">
+            </div>
+            <div id="answerRow" class="row">
+                <h1>
+                    <img id="sdAnswer" width="35em" height="35em" class="bi bi-volume-up" src="./images/vol.svg">
+                    <span id="answer"></span>
+                </h1>
             </div>
             <div class="row">
                 <span class="col score"><h2>Score: <span id="score"></span></h2></span>

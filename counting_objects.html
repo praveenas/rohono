@@ -74,7 +74,7 @@
         if ($("#answer").html() === count + "") {
           score++;
           $("#score").html(score);
-          confetti.start(500);
+          if(score%10==0) {confetti.start(500);}
           $('#playagain').show();
         }
       });

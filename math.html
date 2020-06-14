@@ -100,7 +100,7 @@
         if ($("#answer").html() === answer(x1, x2, operator) + "") {
           score++;
           $("#score").html(score);
-          confetti.start(500);
+          if(score%10==0) {confetti.start(500);}
           $('#playagain').show();
         }
       });

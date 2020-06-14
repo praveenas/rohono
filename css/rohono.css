@@ -241,3 +241,7 @@ body {
   height: 50px;
   padding: 1px;
 }
+
+.prep {
+  color: red;
+}

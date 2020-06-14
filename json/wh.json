@@ -350,5 +350,13 @@
     "image": "fire.svg",
     "answerImage": "firefighter.svg",
     "options": ["policeman.svg", "firefighter.svg", "doctor.svg"]
+  },
+  {
+    "question": "How are the kids feeling?",
+    "answerMissing": "The kids are <>",
+    "answer": "The kids are happy.",
+    "image": "playingkids.svg",
+    "answerImage": "happy.svg",
+    "options": ["happy.svg", "angry.svg", "sad.svg"]
   }
 ]

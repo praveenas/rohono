@@ -3,6 +3,7 @@
     "demand": "Give the <object> <preposition> the <destination>",
     "objects": ["ball", "book", "pretzel", "lollipop", "gummy", "candy", "bottle", "apple", "cupcake", "pizza", "block", "backpack",
       "banana", "boat", "crayon", "icecream", "pen", "brush", "flower", "frenchfries"],
+    "answer": "The <destination> has the <object>.",
     "prepositions": ["to"],
     "destinations": ["boy", "girl"]
   },
@@ -11,12 +12,14 @@
     "objects": ["ball", "book", "pretzel", "lollipop", "gummy", "candy", "bottle", "apple", "cupcake", "pizza", "block", "backpack",
       "banana", "boat", "crayon", "brush", "frenchfries"],
     "prepositions": ["on", "under"],
+    "answer": "The <object> is <preposition> the <destination>.",
     "destinations": ["table", "chair"]
   },
   {
     "demand": "Put the <object> <preposition> the <destination>",
     "objects": ["ball", "pretzel", "lollipop", "gummy", "candy", "crayon", "brush"],
     "prepositions": ["in"],
+    "answer": "The <object> is <preposition> the <destination>.",
     "destinations": ["jar", "box"]
   }
 

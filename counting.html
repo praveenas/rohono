@@ -84,7 +84,7 @@
               $("#" + event.target.id).html(index).addClass("hint");
               $("#" + index).hide();
               if ($('.drag:visible').length == 0) {
-                confetti.start(500);
+                if(score%10==0) {confetti.start(500);}
                 $("#playagain").show();
               }
             },

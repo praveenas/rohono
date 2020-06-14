@@ -84,7 +84,7 @@
           drop: function (event, ui) {
             score++;
             $("#score").html(score);
-            confetti.start(100);
+            if(score%20==0) {confetti.start(500);}
             speak(game.answer, dismiss);
           }
         });
