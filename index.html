@@ -83,7 +83,6 @@
         });
 
         $("#" + destination).droppable({
-          //activeClass: "hint",
           drop: function (event, ui) {
             if(score%20==0) {confetti.start(500);}
             score++;
