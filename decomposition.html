@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+          integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+          crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+          integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+  <script src="./scripts/common.js"></script>
+  <link rel="stylesheet" href="./css/rohono.css">
+</head>
+<script>
+
+  $(function () {
+    var score = 0;
+    var ones, tens = false;
+
+    $('#playagain').click(function () {
+      play();
+    });
+
+    $('#first').click(function () {
+      $('#first').hide();
+      play();
+    });
+
+    function play() {
+
+      ones = false;
+      tens = false;
+      $("#playagain").hide();
+      $("#answer").html("");
+      $("#tensRow").hide();
+      $("#hundredsRow").hide();
+      $("#equation").html("");
+      $("#ones").html("");
+      $("#tens").html("");
+      $("#hundreds").html("");
+      $("#game").show();
+      $(".calc").unbind('click');
+      $("#score").html(score);
+      var x1 = Math.floor(Math.random() * Math.floor(999));
+      $("#equation").html(x1);
+      $(".calc").click(function () {
+        let onesPlace = x1 % 10;
+        let tensPlace = Math.floor(x1 / 10) % 10;
+        let hundredsPlace = Math.floor(x1 / 100) % 10;
+        if (!ones) {
+          if (parseInt(this.id) === onesPlace) {
+            $("#ones").append(this.id);
+            $("#tensRow").show();
+            ones = true;
+          }
+        } else if (ones && !tens) {
+          if (parseInt(this.id) === tensPlace) {
+            $("#tens").append(this.id);
+            $("#hundredsRow").show();
+            tens = true;
+          }
+        } else if (ones && tens) {
+
+          if (parseInt(this.id) === hundredsPlace) {
+            $("#hundreds").append(this.id);
+            score++;
+
+            $("#score").html(score);
+            if (score % 10 == 0) {
+              confetti.start(500);
+            }
+            $("#answer").append(hundredsPlace + (hundredsPlace > 0 ? "00" : "") + " + "
+              + tensPlace + (tensPlace > 0 ? "0" : "") + " + "
+              + x1 % 10 + " = ");
+            $('#playagain').show();
+          }
+        }
+      });
+    }
+
+    $("#game").hide();
+    $("#first").show();
+
+  })
+
+</script>
+
+<body class="text-center">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead mb-auto">
+    <div class="inner">
+      <nav class="nav nav-masthead justify-content-center">
+        <a class="nav-link" href="./">Prepositions</a>
+        <a class="nav-link" href="./math.html">Math Facts</a>
+        <a class="nav-link active" href="./decomposition.html">Decomposition</a>
+        <a class="nav-link" href="./counting.html">Skip Counting</a>
+        <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
+        <a class="nav-link" href="./spelling.html">Spelling</a>
+        <a class="nav-link" href="./typing.html">Typing</a>
+        <a class="nav-link" href="./wh.html">Wh ?'s</a>
+      </nav>
+    </div>
+  </header>
+  <main role="main" class="inner cover">
+
+    <button id="first" type="button" class="btn btn-lg">
+      <h1 class="cover-heading"> Play </h1>
+    </button>
+
+    <div id="game">
+      <div class="row">
+        <button id="playagain" type="button" class="btn btn-lg">
+          <img class="bi bi-play-fill" width="35em" height="35em" src="./images/play.svg">
+        </button>
+      </div>
+
+      <div class="row">
+        <h1 class="cover-heading" id="answer"></h1>
+        <h1 class="cover-heading" id="equation"></h1>
+      </div>
+      <div class="row">
+        <div><h3>How many ones?</h3></div>
+        <h3 id="ones"></h3>
+      </div>
+      <div class="row">
+        <div id="tensRow"><h3>How many tens?</h3></div>
+        <h3 id="tens"></h3>
+      </div>
+      <div class="row">
+        <div id="hundredsRow"><h3>How many hundreds?</h3></div>
+        <h3 id="hundreds"></h3>
+      </div>
+
+      <div class="row">
+        <button id="1" type="button" class="calc btn btn-md"><h1>1</h1></button>
+        <button id="2" type="button" class="calc btn btn-md"><h1>2</h1></button>
+        <button id="3" type="button" class="calc btn btn-md"><h1>3</h1></button>
+        <button id="4" type="button" class="calc btn btn-md"><h1>4</h1></button>
+        <button id="5" type="button" class="calc btn btn-md"><h1>5</h1></button>
+        <button id="6" type="button" class="calc btn btn-md"><h1>6</h1></button>
+        <button id="7" type="button" class="calc btn btn-md"><h1>7</h1></button>
+        <button id="8" type="button" class="calc btn btn-md"><h1>8</h1></button>
+        <button id="9" type="button" class="calc btn btn-md"><h1>9</h1></button>
+        <button id="0" type="button" class="calc btn btn-md"><h1>0</h1></button>
+      </div>
+      <div class="row">
+        <div class="col score"><h2>Score: <span id="score"></span></h2></div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

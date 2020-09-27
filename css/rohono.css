@@ -158,6 +158,10 @@ body {
   padding: 50px;
 }
 
+#ones,#tens,#hundreds {
+  color: #7F86FF;
+  padding-left: 10px;
+}
 
 /** tact **/
 .boy {
