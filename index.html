@@ -14,190 +14,73 @@
     <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
     <script src="./scripts/common.js"></script>
     <link rel="stylesheet" href="./css/rohono.css">
-    <script>
-    var initialized = false;
-    var score = 0;
-    $(function () {
-      var games;
-      $.getJSON( "json/prep.json", function( data ) {
-        games = data;
-        $("#first").show();
-      });
-
-      $('#playagain').click(function () {
-        play();
-      });
-      $('#first').click(function () {
-        speak("Let's play");
-        $('#first').hide();
-        play();
-      });
-      function dismiss() {
-        $("#playagain").show();
-      }
-      function play() {
-        $("#score").html(score);
-        $("#playagain").hide();
-        $("#game").show();
-        $('#demand').html("");
-        $('#answerRow').hide();
-        $('#answer').html("");
-        $('#destinations').html("");
-        $('#spanObject').html("");
-
-        var url = new URL(window.location);
-        var game =  games[Math.floor(Math.random() * games.length)];
-        var object =  game.objects[Math.floor(Math.random() * game.objects.length)];
-        var preposition =  game.prepositions[Math.floor(Math.random() * game.prepositions.length)];
-        var destination =  game.destinations[Math.floor(Math.random() * game.destinations.length)];
-
-        $("#demand").text(game.demand
-        .replace("<object>",object)
-        .replace("<preposition>",preposition)
-        .replace("<destination>", destination));
-
-         $("#answer").text(game.answer
-        .replace("<object>",object)
-        .replace("<preposition>",preposition)
-        .replace("<destination>", destination));
-
-        var image = '<img id=object width="50px" height="50px" style="z-index:1"' + 'src="./images/objects/' + object + '.svg">';
-        $('#spanObject').append(image);
-
-        $('#object').draggable({
-          cursor: "crosshair",
-          revert: 'invalid'
-        });
-
-        game.destinations.forEach(d => {
-          var image = '<img id="'+ d + 'img" class ="obj" width="400px" height="300px" ' + 'src="./images/objects/' + d + '.svg">';
-          var div = '<div id="'+ d + '" class ="prep '+ preposition +'"></div>';
-          $('#destinations').append(image + div);
-        });
-
-        $('#sd').click(function () {
-          speak($("#demand").text());
-        });
-         $('#sdAnswer').click(function () {
-          speak($("#answer").text());
-        });
-
-        $("#" + destination).droppable({
-          drop: function (event, ui) {
-            if(score%20==0) {confetti.start(500);}
-            score++;
-            $("#" + destination).droppable('disable');
-            $("#answerRow").show();
-            speak($("#answer").text());
-            $("#playagain").show();
-          }
-        });
-
-        $("#" + destination).droppable('enable');
-      }
-
-      $("#game").hide();
-      $("#answerRow").hide();
 
 
-    });
-
-  </script>
-    <style>
-
-        .cover-container {
-        max-width: 60em;
-        }
-
-        .play {
-            margin-top: 0px;
-        }
-        .prep {
-         width: 150px;
-         height: 150px;
-        }
-
-        .to {
-         margin-left: -200px;
-         margin-top: 100px;
-        }
-
-        .on {
-         margin-left: -220px;
-         margin-top: 120px;
-         height: 40px;
-         width: 200px;
-        }
-
-        .in {
-         margin-left: -200px;
-         margin-top: 100px;
-        }
-
-        .under {
-         margin-left: -200px;
-         margin-top: 190px;
-         height: 100px;
-        }
-
-        .obj {
-         padding-left: 150px;
-        }
-
-        #tableimg {
-         margin-top: 90px;
-        }
-
-    </style>
 </head>
 <body>
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
-        <div class="inner">
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="./">Prepositions</a>
-                <a class="nav-link" href="./math.html">Math Facts</a>
-                <a class="nav-link" href="./decomposition.html">Decomposition</a>
-                <a class="nav-link" href="./counting.html">Skip Counting</a>
-                <a class="nav-link" href="./counting_objects.html">Counting Objects</a>
-                <a class="nav-link" href="./spelling.html">Spelling</a>
-                <a class="nav-link" href="./typing.html">Typing</a>
-                <a class="nav-link" href="./wh.html">Wh ?'s</a>
-            </nav>
-        </div>
-    </header>
     <main role="main" class="inner cover">
+
         <div class="padding-top">
-            <button id="first" type="button" class="btn btn-lg">
-                <h1 class="cover-heading"> Play </h1>
-            </button>
-        </div>
-
-        <div id="game">
             <div class="row">
-                <h1>
-                    <img id="sd" width="35em" height="35em" class="bi bi-volume-up" src="./images/vol.svg">
-                    <span id="demand"></span>
-                    <span id="spanObject"></span>
-
-                </h1>
-                <div class="play">
-                    <button id="playagain" type="button" class="btn btn-lg">
-                        <img class="bi bi-play-fill" width="35em" height="35em"  src="./images/play.svg">
-                    </button>
+                <div class="col-sm">
+                    <a href="./prepositions.html" class="btn">
+                        <img src="./images/prep.svg" width="150px">
+                        <h5 class="card-title">Prepositions</h5>
+                    </a>
                 </div>
-                <span class="col score"><h2>Score: <span id="score"></span></h2></span>
+                <div class="col-sm">
+                    <a href="./wh.html" class="btn">
+                        <img src="./images/wh.svg" width="150px">
+                        <h5 class="card-title">Wh Questions?</h5>
+                    </a>
+                </div>
+                <div class="col-sm">
+                    <a href="./spelling.html" class="btn">
+                        <img src="./images/spelling.svg" width="150px">
+                        <h5 class="card-title">Spelling</h5>
+                    </a>
+                </div>
+                <div class="col-sm">
+                    <a href="./typing.html" class="btn">
+                        <img src="./images/typing.svg" width="150px">
+                        <h5 class="card-title">Typing</h5>
+                    </a>
+                </div>
             </div>
-            <div id="destinations" class="row">
-            </div>
-            <div id="answerRow" class="row">
-                <h1>
-                    <img id="sdAnswer" width="35em" height="35em" class="bi bi-volume-up" src="./images/vol.svg">
-                    <span id="answer"></span>
-                </h1>
+            <div class="row">
+                <div class="col-sm">
+                    <a href="./math.html" class="btn">
+                        <img src="./images/math.svg" width="150px">
+                        <h5 class="card-title">Math</h5>
+                    </a>
+                </div>
+                <div class="col-sm">
+                    <a href="./numberline.html" class="btn">
+                        <img src="./images/word_problems.svg" width="150px">
+                        <h5 class="card-title">Word Problems</h5>
+                    </a>
+                </div>
+                <div class="col-sm">
+                    <a href="./decomposition.html" class="btn">
+                        <img src="./images/decomposition.svg" width="150px">
+                        <h5 class="card-title">Decomposition</h5>
+                    </a>
+                </div>
+                <div class="col-sm">
+                    <a href="./counting.html" class="btn">
+                        <img src="./images/skip_counting.svg" width="150px">
+                        <h5 class="card-title">Skip Counting</h5>
+                    </a>
+                </div>
+                <div class="col-sm">
+                    <a href="./counting_objects.html" class="btn">
+                        <img src="./images/counting.svg" width="150px">
+                        <h5 class="card-title">Counting</h5>
+                    </a>
+                </div>
             </div>
         </div>
-
     </main>
 </div>
 </body>

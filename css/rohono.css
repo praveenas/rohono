@@ -6,6 +6,13 @@ body {
   color: #fff;
 }
 
+.blue {
+ background-color: #7FDBFF;
+}
+
+a {
+  color: #001f3f;
+}
 /*
 * Header
 */
@@ -248,4 +255,8 @@ body {
 
 .prep {
   color: red;
+}
+
+.active {
+  background-color: #FFA37F;
 }

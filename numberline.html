@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+    <script src="./scripts/common.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="./css/rohono.css">
+</head>
+<style>
+  .cover-container {
+    max-width: 60em;
+  }
+  #equation {
+    font-size: 2rem;
+    text-align: left;
+    padding: 5px;
+  }
+  .left {
+    font-size: 2rem;
+    text-align: left;
+  }
+
+  #answer, .question {
+    font-size: 2rem;
+  }
+  .calc {
+    width: 70px;
+  }
+  .hover {
+    width: 70px;
+    background-color: white;
+    color: #FFA37F;
+    font-weight: bolder;
+  }
+
+  #boyobjects, #girlobjects {
+    margin-top: -140px;
+    width: 250px;
+    margin-left: 75px;
+    margin-right: 75px;
+  }
+
+  #boyqty, #girlqty, .qty {
+   color: #7F86FF;
+   font-weight: 800;
+  }
+
+  .white {
+    color: white;
+  }
+
+</style>
+<script>
+
+  $(function () {
+    var operators = [];
+    var score = 0;
+
+    var objects = ['ball', 'book', 'pretzel', 'lollipop', 'gummy', 'candy', 'bottle', 'apple', 'cupcake', 'pizza', 'block', 'backpack',
+                   'banana', 'boat', 'crayon', 'icecream', 'pen', 'brush', 'flower', 'frenchfries', 'orange'
+    ];
+
+    var url = new URL(window.location);
+    var object = url.searchParams.get("object") || objects[Math.floor(Math.random() * objects.length)];
+
+    $('#sd').click(function () {
+      speak("How many do they have together?");
+    });
+     $('#sdAnswer').click(function () {
+      speak($("#answer").text());
+    });
+   
+    $('#playagain').click(function () {
+      play();
+    });
+
+    $('#first').click(function () {
+      $('#first').hide();
+
+      var add = true; //$('#add').is(":checked");
+      var subtract = $('#subtract').is(":checked");
+      if (add) {
+        operators.push("+");
+      }
+      if (subtract) {
+        operators.push("-");
+      }
+
+      if (operators.length == 0) {
+        operators = ["+", "-"];
+      }
+
+      play();
+    });
+
+    $(".clear").click(function () {
+      $("#answer").html("");
+    });
+
+    function plural(count, object){
+      return count == 1 || object.endsWith("s") ? object : (object.endsWith("y") ? object.substring(0, object.length - 1) + "ies" : object +"s");
+    }
+    function answer(x1, x2, operator) {
+      switch (operator) {
+        case "+" :
+          return x1 + x2;
+        case "-" :
+          return x1 - x2;
+      }
+    }
+
+    function play() {
+
+      $("#playagain").hide();
+      $("#options").hide();
+      $("#equation").html("");
+      $("#answer").html("");
+      $("#game").show();
+      $(".calc").unbind('click');
+      $(".calc").removeClass("active");
+      $("#score").html(score)
+      $(".hover").hide();
+      $("#boyobjects").html("");
+      $("#girlobjects").html("");
+      $("#sdAnswer").hide();
+      
+      var current = 0;
+      var started=false;
+      var target = 0;
+
+      var operator = operators[Math.floor(Math.random() * Math.floor(operators.length))];
+
+      var x1 = Math.floor(Math.random() * Math.floor(9));
+      var x2 = Math.floor(Math.random() * Math.floor(9-x1));
+
+      $("#boyqty").html(x1);
+      $("#girlqty").html(x2);
+
+      $("#bobject").html(plural(x1, object));
+      $("#gobject").html(plural(x2, object));
+
+       var i;
+        for(i = 0; i < x1; i++) {
+        var image = '<img id=object'+i+' width="50px" height="50px"' + 'src="./images/objects/' + object + '.svg">';
+        $('#boyobjects').append(image);
+        }
+
+        for(i = 0; i < x2; i++) {
+        var image = '<img id=object'+i+' width="50px" height="50px"' + 'src="./images/objects/' + object + '.svg">';
+        $('#girlobjects').append(image);
+        }
+
+      $(".calc").click(function () {
+
+        if(
+          (!started && parseInt(this.id) === x1) 
+        || (started && target === parseInt(this.id)) 
+        || (this.id == answer(x1, x2, operator) )
+        ) {
+          
+          started = true;
+
+          current = parseInt(this.id);
+          target = current + 1;
+          var i=0;
+          for(i =0; i<=current; i++ ){
+            if(i > x1){
+              $("#hover" + i).html(i-x1);
+            } else {
+              $("#hover" + i).html(".");
+            }
+            $("#hover" + i).show();
+
+          }
+          //$("#answer").html(this.id);
+        
+        
+        $(".calc").removeClass("active");
+        $("#"+this.id).addClass("active");
+        if (current === answer(x1, x2, operator)) {
+           var objectStr = plural(current, object);
+           $("#answer").html("They have <span class='white qty'> "+this.id+"</span> "+ objectStr + "  together.");
+           $(".calc").unbind('click');
+            score++;
+            $("#sdAnswer").show();
+          $("#score").html(score);
+          if(score%10==0) {confetti.start(500);}
+          speak($("#answer").text(), function(){
+            $('#playagain').show();
+          });
+        }
+      }
+      });
+    }
+
+    $("#game").hide();
+    $("#first").show();
+
+  })
+
+
+</script>
+<body class="text-center">
+
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <nav class="nav nav-masthead justify-content-center">
+                <a href="./">
+                    <button type="button" class="btn">
+                        <img src="./images/home.svg">
+                    </button>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <main role="main" class="inner cover">
+
+        <div id="options">
+            <button id="first" type="button" class="btn btn-lg">
+                <h1 class="cover-heading"> Play </h1>
+            </button>
+
+        </div>
+        <div id="game">
+            <div class="row">
+                <div class="cover-heading" id="equation"></div>
+                <div id="destinations" class="row">
+                    <img id="boyimg" class="obj" width="400px" height="300px" src="./images/objects/boy.svg">
+                    <img id="girlimg" class="obj" width="400px" height="300px" src="./images/objects/girl.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div id="boyobjects"></div>
+                <div id="girlobjects"></div>
+            </div>
+            <div class="row">
+                <div class="col left"> A boy has <span id="boyqty"></span> <span id="bobject"></span></div>
+                <div class="col left"> A girl has <span id="girlqty"></span> <span id="gobject"></span></div>
+            </div>
+            <div class="row question">
+                <img id="sd" width="20em" height="20em" class="bi bi-volume-up" src="./images/vol.svg">
+                How many do they have together?
+            </div>
+            <div class="row">
+                <img id="sdAnswer" width="20em" height="20em" class="bi bi-volume-up" src="./images/vol.svg">
+                <div id="answer"></div>
+                <button id="playagain" type="button" class="btn btn-md">
+                  <img class="bi bi-play-fill" width="30em" height="30em" src="./images/play.svg">
+                </button>
+
+            </div>
+            <div class="row">
+                <span id="hover0" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover1" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover2" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover3" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover4" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover5" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover6" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover7" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover8" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover9" type="button" class="hover btn btn-md"><h1>.</h1></span>
+                <span id="hover10" type="button" class="hover btn btn-md"><h1>.</h1></span>
+            </div>
+            <div class="row">
+                <button id="0" type="button" class="calc btn btn-md"><h1>0</h1></button>
+                <button id="1" type="button" class="calc btn btn-md"><h1>1</h1></button>
+                <button id="2" type="button" class="calc btn btn-md"><h1>2</h1></button>
+                <button id="3" type="button" class="calc btn btn-md"><h1>3</h1></button>
+                <button id="4" type="button" class="calc btn btn-md"><h1>4</h1></button>
+                <button id="5" type="button" class="calc btn btn-md"><h1>5</h1></button>
+                <button id="6" type="button" class="calc btn btn-md"><h1>6</h1></button>
+                <button id="7" type="button" class="calc btn btn-md"><h1>7</h1></button>
+                <button id="8" type="button" class="calc btn btn-md"><h1>8</h1></button>
+                <button id="9" type="button" class="calc btn btn-md"><h1>9</h1></button>
+                <button id="10" type="button" class="calc btn btn-md"><h1>10</h1></button>
+            </div>
+            <div class="row">
+                <div class="col score"><h2>Score: <span id="score"></span></h2></div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
