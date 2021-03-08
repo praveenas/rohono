@@ -358,5 +358,13 @@
     "image": "playingkids.svg",
     "answerImage": "happy.svg",
     "options": ["happy.svg", "angry.svg", "sad.svg"]
+  },
+  {
+    "question": "What is this?",
+    "answerMissing": "This is <>",
+    "answer": "This is 5.",
+    "image": "fivetally.png",
+    "answerImage": "five.png",
+    "options": ["five.png", "four.png", "eight.png"]
   }
 ]
